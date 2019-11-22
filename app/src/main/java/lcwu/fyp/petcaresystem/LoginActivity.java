@@ -12,6 +12,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     Button btnLogin;
     EditText edtEmail,edtPassword;
+    String strEmail;
+    String strPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,26 +35,42 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         switch (id){
             case R.id.btnLogin:{
-                String strEmail = edtEmail.getText().toString();
+                strEmail = edtEmail.getText().toString();
 
-                String strPassword = edtPassword.getText().toString();
+                strPassword = edtPassword.getText().toString();
 
-                if (strEmail.length()<6 || !Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()){
-                    edtEmail.setError("Enter A Valid Email");
-                }
-                else {
-                    edtEmail.setError(null);
+                boolean flag = isValid();
+                if (flag){
+                    ///Firebase
+
+
+
                 }
 
-                if (strPassword.length()<6){
-                    edtPassword.setError("Enter A Valid Password");
-                }
-                else {
-                    edtPassword.setError(null);
-                }
                 break;
             }
         }
 
+    }
+
+    private boolean isValid(){
+        boolean Flag = true;
+
+        if (strEmail.length()<6 || !Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()){
+            edtEmail.setError("Enter A Valid Email");
+            Flag = false;
+        }
+        else {
+            edtEmail.setError(null);
+        }
+
+        if (strPassword.length()<6){
+            edtPassword.setError("Enter A Valid Password");
+            Flag = false;
+        }
+        else {
+            edtPassword.setError(null);
+        }
+        return Flag;
     }
 }

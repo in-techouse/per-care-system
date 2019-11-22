@@ -60,9 +60,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView
-        android:text=""
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+  <TextView
+      android:textAlignment="center"
+      android:textColor="@color/colorPrimaryDark"
+      android:id="@+id/go_To_Signup"
+      android:layout_margin="22sp"
+      android:padding="12dp"
+      android:text="Don't Have A Account? Click Here To Register"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"/>
 
 </LinearLayout>
