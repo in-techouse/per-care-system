@@ -8,6 +8,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.sql.Ref;
 
@@ -17,7 +18,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText edtEmail,edtPassword;
     String strEmail;
     String strPassword;
-
+    TextView go_To_Signup;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +28,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
-
+        go_To_Signup = findViewById(R.id.go_To_Signup);
         btnLogin.setOnClickListener(this);
+        go_To_Signup.setOnClickListener(this);
 
     }
 
@@ -45,12 +47,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 boolean flag = isValid();
                 if (flag){
                     ///Firebase
-
-
-
-
-
-
 
                 }
 
