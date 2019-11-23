@@ -2,11 +2,14 @@ package lcwu.fyp.petcaresystem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import java.sql.Ref;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,10 +48,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
 
+
+
+
+
                 }
 
                 break;
+
             }
+            case R.id.go_To_Signup:{
+                Intent it = new Intent( LoginActivity.this, RegistrationActivity.class);
+                startActivity(it);
+                break;
+            }
+
         }
 
     }
