@@ -58,9 +58,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 boolean flag = isValid();
                 if (flag){
                     ///firebase
+                    LoginProgress.setVisibility(View.VISIBLE);
+                    btnLogin.setVisibility(View.GONE);
 
                     FirebaseAuth auth = FirebaseAuth.getInstance();
-                    auth.signInWithEmailAndPassword("email", "password")
+                    auth.signInWithEmailAndPassword(strEmail, strPassword)
                       .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                           @Override
                           public void onSuccess(AuthResult authResult) {
@@ -80,8 +82,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         }
                     });
 
-                    LoginProgress.setVisibility(View.VISIBLE);
-                    btnLogin.setVisibility(View.GONE);
+
 
 
                 }
