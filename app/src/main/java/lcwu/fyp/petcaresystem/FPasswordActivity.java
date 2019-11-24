@@ -83,8 +83,6 @@ public class FPasswordActivity extends AppCompatActivity implements View.OnClick
             edtconfirm.setError(null);
         }
         return Flag;
-
-
-          }
+  }
 
 }
