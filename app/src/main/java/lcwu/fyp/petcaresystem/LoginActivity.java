@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     String strEmail;
     String strPassword;
     TextView go_To_Signup;
+    TextView ForgotPassword;
     ProgressBar LoginProgress;
 
     @Override
@@ -38,11 +39,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         edtEmail = findViewById(R.id.edtEmail);
         edtPassword = findViewById(R.id.edtPassword);
         go_To_Signup = findViewById(R.id.go_To_Signup);
+        ForgotPassword = findViewById(R.id.FPassword);
         LoginProgress = findViewById(R.id.LoginProgress);
 
         btnLogin.setOnClickListener(this);
         go_To_Signup.setOnClickListener(this);
-
+        ForgotPassword.setOnClickListener(this);
     }
 
     @Override
@@ -92,6 +94,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
             case R.id.go_To_Signup:{
                 Intent it = new Intent( LoginActivity.this, RegistrationActivity.class);
+                startActivity(it);
+                break;
+            }
+            case R.id.FPassword:{
+                Intent it = new Intent( LoginActivity.this, FPasswordActivity.class);
                 startActivity(it);
                 break;
             }
