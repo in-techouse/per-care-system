@@ -1,20 +1,30 @@
 package lcwu.fyp.petcaresystem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 
       Button btnSubmit;
       TextView go_To_Login;
       EditText edtFirstName, edtLastName, edtEmail, edtPhone, edtPassword, edtCnfrmPass;
+      String str1stName, strLastName, strEmail, strPh, strPass, strCnfmPass;
+      ProgressBar registrationProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +40,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
       edtPhone= findViewById(R.id.edtphone);
       edtPassword= findViewById(R.id.edtpassword);
       edtCnfrmPass= findViewById(R.id.edtCnfrmPass);
-
+      registrationProgress= findViewById(R.id.registrationProgress);
 
        btnSubmit.setOnClickListener(this);
        go_To_Login.setOnClickListener(this);
@@ -44,81 +54,47 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
       int id=v.getId();
       switch (id)
         {
-            case R.id.btnSubmit:
-            {
-              String str1stName= edtFirstName.getText().toString();
-              String strLastName= edtLastName.getText().toString();
-              String strEmail= edtEmail.getText().toString();
-              String strPh= edtPhone.getText().toString();
-              String strpass= edtPassword.getText().toString();
-              String strcnfmPass= edtCnfrmPass.getText().toString();
+            case R.id.btnSubmit: {
+                str1stName = edtFirstName.getText().toString();
+                strLastName = edtLastName.getText().toString();
+                strEmail = edtEmail.getText().toString();
+                strPh = edtPhone.getText().toString();
+                strPass = edtPassword.getText().toString();
+                strCnfmPass = edtCnfrmPass.getText().toString();
 
-              if (str1stName.length()<3)
-              {
-                 edtFirstName.setError("Enter a valid Name");
-              }
-              else
-              {
-                  edtFirstName.setError(null);
-              }
+                boolean flag = isValid();
+                if (flag) {
+
+                    //firebase
+
+                    registrationProgress.setVisibility(View.VISIBLE);
+                    btnSubmit.setVisibility(View.GONE);
 
 
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    auth.createUserWithEmailAndPassword(strEmail, strPass)
+                            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    registrationProgress.setVisibility(View.GONE);
+                                    btnSubmit.setVisibility(View.VISIBLE);
+                                    Log.e("Registration","Success");
 
-              if (strLastName.length()<3)
-              {
-                  edtLastName.setError("Enter a valid Name");
-              }
-              else
-              {
-                  edtLastName.setError(null);
-              }
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    registrationProgress.setVisibility(View.GONE);
+                                    btnSubmit.setVisibility(View.VISIBLE);
+                                    Log.e("Registration","Fail " + e.getMessage());
+                                }
+                    });
 
+                }
+                break;
 
-              if (strEmail.length()<6 || !Patterns.EMAIL_ADDRESS.matcher(strEmail).matches())
-              {
-                   edtEmail.setError("Enter a valid Email");
-              }
-              else
-              {
-                  edtEmail.setError(null);
-              }
-
-
-              if (strPh.length() != 11)
-              {
-                 edtPhone.setError("Enter a valid Mobile Number");
-              }
-              else
-              {
-                  edtPhone.setError(null);
-              }
-
-
-              if (strpass.length()<6)
-              {
-                  edtPassword.setError("Enter a valid Password");
-              }
-              else
-              {
-                  edtPassword.setError(null);
-              }
-
-
-              if (strcnfmPass.length()<6)
-              {
-                  edtCnfrmPass.setError("Password does not Match");
-              }
-              else
-              {
-                  edtCnfrmPass.setError(null);
-              }
-
-
-              break;
 
             }
-
-
             //go to next activity
 
             case R.id.go_To_Login:
@@ -130,4 +106,68 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         }
     }
+
+
+  private boolean isValid()
+  {
+      boolean flag= true;
+      if (str1stName.length()<3) {
+          edtFirstName.setError("Enter a valid Name");
+          flag= false;
+      }
+      else {
+          edtFirstName.setError(null);
+      }
+
+
+
+      if (strLastName.length()<3) {
+          edtLastName.setError("Enter a valid Name");
+          flag= false;
+      }
+      else {
+          edtLastName.setError(null);
+      }
+
+
+      if (strEmail.length()<6 || !Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()) {
+          edtEmail.setError("Enter a valid Email");
+          flag= false;
+      }
+      else {
+          edtEmail.setError(null);
+      }
+
+
+      if (strPh.length() != 11) {
+          edtPhone.setError("Enter a valid Mobile Number");
+          flag= false;
+      }
+      else {
+          edtPhone.setError(null);
+      }
+
+
+      if (strPass.length()<6)
+      {
+          edtPassword.setError("Enter a valid Password");
+          flag= false;
+      }
+      else
+      {
+          edtPassword.setError(null);
+      }
+
+
+      if (strCnfmPass.length()<6)
+      {
+          edtCnfrmPass.setError("Password does not Match");
+          flag= false;
+      }
+      else
+      {
+          edtCnfrmPass.setError(null);
+      }
+      return flag;
+  }
 }
