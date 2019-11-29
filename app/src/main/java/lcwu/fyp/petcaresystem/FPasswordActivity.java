@@ -33,8 +33,6 @@ public class FPasswordActivity extends AppCompatActivity implements View.OnClick
 
         btnContinue.setOnClickListener(this);
 
-
-
     }
 
     @Override
@@ -63,13 +61,9 @@ public class FPasswordActivity extends AppCompatActivity implements View.OnClick
 
                                   }
                               });
-
                   }
-
-
             }
         }
-
     }
 
     private boolean isValid(){

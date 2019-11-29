@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:textColor="@color/colorAccent"
+        android:textColor="#9C089C"
         android:layout_margin="22sp"
         android:padding="12dp"
         android:textAlignment="center"
@@ -63,8 +63,8 @@
         android:layout_margin="35dp"
         android:textAlignment="center"
         android:text="Login"
-        android:textColor="@color/colorPrimaryDark"
-        android:background="@color/colorAccent"
+        android:background="#0A86BC"
+        android:textColor="#9C089C"
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

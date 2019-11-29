@@ -3,7 +3,10 @@ package lcwu.fyp.petcaresystem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -17,8 +20,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.shreyaspatil.MaterialDialog.MaterialDialog;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import java.sql.Ref;
+
+import lcwu.fyp.petcaresystem.director.Helpers;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,6 +36,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView go_To_Signup;
     TextView ForgotPassword;
     ProgressBar LoginProgress;
+    Helpers helpers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +53,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin.setOnClickListener(this);
         go_To_Signup.setOnClickListener(this);
         ForgotPassword.setOnClickListener(this);
+
+        helpers = new Helpers();
     }
 
     @Override
@@ -53,12 +63,40 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         switch (id){
             case R.id.btnLogin:{
+                boolean flag1 = helpers.isConnected(LoginActivity.this);
+                if(!flag1){
+                    MaterialDialog mDialog = new MaterialDialog.Builder(this)
+                            .setTitle("Delete?")
+                            .setMessage("Are you sure want to delete this file?")
+                            .setCancelable(false)
+                            .setPositiveButton("Delete", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                    // Delete Operation
+                                }
+                            })
+                            .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                    dialogInterface.dismiss();
+                                }
+                            })
+                            .build();
+
+                    // Show Dialog
+                    mDialog.show();
+                    return;
+                }
+
+
                 strEmail = edtEmail.getText().toString();
 
                 strPassword = edtPassword.getText().toString();
 
+
                 boolean flag = isValid();
-                if (flag){
+                if (flag)
+                {
                     ///firebase
                     LoginProgress.setVisibility(View.VISIBLE);
                     btnLogin.setVisibility(View.GONE);
@@ -85,8 +123,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     });
 
 
-
-
                 }
 
                 break;
@@ -110,7 +146,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private boolean isValid(){
         boolean Flag = true;
 
-        if (strEmail.length()<6 || !Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()){
+        if (strEmail.length()<6 || ! Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()){
             edtEmail.setError("Enter A Valid Email");
             Flag = false;
         }
@@ -127,4 +163,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         return Flag;
     }
+
+
 }
