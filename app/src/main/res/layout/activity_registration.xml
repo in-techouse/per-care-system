@@ -119,15 +119,14 @@
          android:hint="Confirm Password"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"/>
-        </com.google.android.material.textfield.TextInputLayout>
-
+    </com.google.android.material.textfield.TextInputLayout>
 
 
      <Button
          android:layout_margin="22sp"
          android:padding="12dp"
          android:id="@+id/btnSubmit"
-         android:background="#0A86BC"
+         android:background="@color/colorPrimary"
          android:textColor="#9C089C"
          android:text="Submit"
          android:textAlignment="center"
@@ -144,7 +143,7 @@
 
 
     <TextView
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/colorPrimary"
         android:text="Already have an Account? Click here to login"
         android:layout_margin="35dp"
         android:padding="12dp"

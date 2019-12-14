@@ -123,6 +123,28 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                 public void onFailure(@NonNull Exception e) {
                                     registrationProgress.setVisibility(View.GONE);
                                     btnSubmit.setVisibility(View.VISIBLE);
+                                    MaterialDialog mDialog = new MaterialDialog.Builder(RegistrationActivity.this)
+                                            .setTitle("Registration Failed!")
+                                            .setMessage(e.getMessage())
+                                            .setCancelable(false)
+                                            .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int which) {
+                                                    dialogInterface.dismiss();
+                                                    // Delete Operation
+                                                }
+                                            })
+                                            .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialogInterface, int which) {
+                                                    dialogInterface.dismiss();
+                                                }
+                                            })
+                                            .build();
+
+                                    // Show Dialog
+                                    mDialog.show();
+
                                     Log.e("Registration","Fail " + e.getMessage());
                                 }
                     });

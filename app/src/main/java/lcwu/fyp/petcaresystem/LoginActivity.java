@@ -123,6 +123,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             LoginProgress.setVisibility(View.GONE);
                             btnLogin.setVisibility(View.VISIBLE);
                             Log.e("LogIn", "Fail " + e.getMessage());
+                            MaterialDialog mDialog = new MaterialDialog.Builder(LoginActivity.this)
+                                    .setTitle("Login Failed!")
+                                    .setMessage(e.getMessage())
+                                    .setCancelable(false)
+                                    .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int which) {
+                                            dialogInterface.dismiss();
+                                            // Delete Operation
+                                        }
+                                    })
+                                    .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int which) {
+                                            dialogInterface.dismiss();
+                                        }
+                                    })
+                                    .build();
+
+                            // Show Dialog
+                            mDialog.show();
                         }
                     });
 

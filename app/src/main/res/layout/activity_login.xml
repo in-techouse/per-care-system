@@ -63,7 +63,7 @@
         android:layout_margin="35dp"
         android:textAlignment="center"
         android:text="Login"
-        android:background="#0A86BC"
+        android:background="@color/colorPrimary"
         android:textColor="#9C089C"
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
@@ -80,7 +80,7 @@
 
   <TextView
       android:textAlignment="center"
-      android:textColor="@color/colorPrimaryDark"
+      android:textColor="@color/colorPrimary"
       android:id="@+id/go_To_Signup"
       android:layout_margin="22sp"
       android:padding="12dp"
