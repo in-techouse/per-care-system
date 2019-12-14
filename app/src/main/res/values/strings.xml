@@ -11,4 +11,8 @@
     <string name="email_email">Email Email</string>
     <string name="enter_password2">Enter Password</string>
     <string name="go_to_login">Already have an account ? Click here to Login</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>

@@ -65,13 +65,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogin:{
                 boolean flag1 = helpers.isConnected(LoginActivity.this);
                 if(!flag1){
-                    MaterialDialog mDialog = new MaterialDialog.Builder(this)
-                            .setTitle("Delete?")
-                            .setMessage("Are you sure want to delete this file?")
+
+
+                    MaterialDialog mDialog = new MaterialDialog.Builder(LoginActivity.this)
+                            .setTitle("Internet Connection Error")
+                            .setMessage("Not Connected To Internet! Check Your Connection And Try Again")
                             .setCancelable(false)
-                            .setPositiveButton("Delete", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
+                            .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int which) {
+                                   dialogInterface.dismiss();
                                     // Delete Operation
                                 }
                             })
@@ -108,10 +111,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                           public void onSuccess(AuthResult authResult) {
                               LoginProgress.setVisibility(View.GONE);
                               btnLogin.setVisibility(View.VISIBLE);
+
                               Log.e("LogIn", "Success");
-
-
-
+                              Intent it = new Intent(LoginActivity.this, Dashboard.class);
+                              startActivity(it);
+                              finish();
                           }
                       }).addOnFailureListener(new OnFailureListener() {
                         @Override

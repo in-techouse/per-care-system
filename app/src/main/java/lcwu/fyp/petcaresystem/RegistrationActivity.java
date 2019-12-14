@@ -3,7 +3,10 @@ package lcwu.fyp.petcaresystem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -17,6 +20,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.shreyaspatil.MaterialDialog.MaterialDialog;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -62,6 +67,36 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 strPass = edtPassword.getText().toString();
                 strCnfmPass = edtCnfrmPass.getText().toString();
 
+                //check internet
+                boolean isConn = isConnected();
+                if (!isConn)
+                {
+                    //show error message, because no internet connection
+                    MaterialDialog mDialog = new MaterialDialog.Builder(RegistrationActivity.this)
+                            .setTitle("Internet Connection Error")
+                            .setMessage("Not Connected To Internet! Check Your Connection And Try Again")
+                            .setCancelable(false)
+                            .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                   dialogInterface.dismiss();
+                                    // Delete Operation
+                                }
+                            })
+                            .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int which) {
+                                    dialogInterface.dismiss();
+                                }
+                            })
+                            .build();
+
+                    // Show Dialog
+                    mDialog.show();
+                    return;
+                }
+
+
                 boolean flag = isValid();
                 if (flag) {
 
@@ -79,7 +114,9 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                     registrationProgress.setVisibility(View.GONE);
                                     btnSubmit.setVisibility(View.VISIBLE);
                                     Log.e("Registration","Success");
-
+                                    Intent it = new Intent(RegistrationActivity.this, Dashboard.class);
+                                    startActivity(it);
+                                    finish();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
@@ -92,8 +129,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                 }
                 break;
-
-
             }
             //go to next activity
 
@@ -170,4 +205,18 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
       }
       return flag;
   }
+
+
+    // Check Internet Connection
+
+    private boolean isConnected() {
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)
+            connected = true;
+        else
+            connected = false;
+        return  connected;
+    }
+
 }
