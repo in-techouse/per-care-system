@@ -1,4 +1,4 @@
-package lcwu.fyp.petcaresystem;
+package lcwu.fyp.petcaresystem.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +22,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.shreyaspatil.MaterialDialog.MaterialDialog;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
+
+import lcwu.fyp.petcaresystem.R;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 

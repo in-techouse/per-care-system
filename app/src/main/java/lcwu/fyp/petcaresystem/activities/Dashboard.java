@@ -1,4 +1,4 @@
-package lcwu.fyp.petcaresystem;
+package lcwu.fyp.petcaresystem.activities;
 
 import android.os.Bundle;
 
@@ -9,6 +9,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import lcwu.fyp.petcaresystem.R;
 
 public class Dashboard extends AppCompatActivity {
 

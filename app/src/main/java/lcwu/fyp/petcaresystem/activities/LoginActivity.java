@@ -1,12 +1,9 @@
-package lcwu.fyp.petcaresystem;
+package lcwu.fyp.petcaresystem.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
@@ -23,8 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.shreyaspatil.MaterialDialog.MaterialDialog;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
-import java.sql.Ref;
-
+import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Helpers;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
