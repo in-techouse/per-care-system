@@ -19,6 +19,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.shreyaspatil.MaterialDialog.MaterialDialog;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Helpers;
@@ -102,16 +107,32 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     auth.signInWithEmailAndPassword(strEmail, strPassword)
+
                       .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                           @Override
                           public void onSuccess(AuthResult authResult) {
                               LoginProgress.setVisibility(View.GONE);
                               btnLogin.setVisibility(View.VISIBLE);
 
-                              Log.e("LogIn", "Success");
-                              Intent it = new Intent(LoginActivity.this, Dashboard.class);
-                              startActivity(it);
-                              finish();
+                              DatabaseReference reference  = FirebaseDatabase.getInstance().getReference();  //for database read,write ,delete and update
+                              reference.child("Users").addValueEventListener(new ValueEventListener() {
+                                  @Override
+                                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                  }
+
+                                  @Override
+                                  public void onCancelled(@NonNull DatabaseError databaseError) {
+
+
+                                  }
+                              });          //use capital letters and always plural
+
+//                              LoginProgress.setVisibility(View.GONE);
+//                              btnLogin.setVisibility(View.VISIBLE);
+//                              Log.e("LogIn", "Success");
+
+
                           }
                       }).addOnFailureListener(new OnFailureListener() {
                         @Override
