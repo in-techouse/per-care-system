@@ -20,10 +20,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.shreyaspatil.MaterialDialog.MaterialDialog;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import lcwu.fyp.petcaresystem.R;
+import lcwu.fyp.petcaresystem.director.Helpers;
+import lcwu.fyp.petcaresystem.model.User;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -32,11 +36,14 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
       EditText edtFirstName, edtLastName, edtEmail, edtPhone, edtPassword, edtCnfrmPass;
       String str1stName, strLastName, strEmail, strPh, strPass, strCnfmPass;
       ProgressBar registrationProgress;
+      Helpers helpers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
+
+        helpers = new Helpers();
 
        btnSubmit=findViewById(R.id.btnSubmit);
        go_To_Login=findViewById(R.id.go_To_Login);
@@ -70,31 +77,10 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                 strCnfmPass = edtCnfrmPass.getText().toString();
 
                 //check internet
-                boolean isConn = isConnected();
+                boolean isConn = helpers.isConnected(RegistrationActivity.this);
                 if (!isConn)
                 {
-                    //show error message, because no internet connection
-                    MaterialDialog mDialog = new MaterialDialog.Builder(RegistrationActivity.this)
-                            .setTitle("Internet Connection Error")
-                            .setMessage("Not Connected To Internet! Check Your Connection And Try Again")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int which) {
-                                   dialogInterface.dismiss();
-                                    // Delete Operation
-                                }
-                            })
-                            .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int which) {
-                                    dialogInterface.dismiss();
-                                }
-                            })
-                            .build();
-
-                    // Show Dialog
-                    mDialog.show();
+                    helpers.showError(RegistrationActivity.this , "Internet Connection Error" ,"Not Connected To Internet! Check Your Connection And Try Again" );
                     return;
                 }
 
@@ -111,11 +97,18 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     auth.createUserWithEmailAndPassword(strEmail, strPass)
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                                @Override
+
                                 public void onSuccess(AuthResult authResult) {
-                                    registrationProgress.setVisibility(View.GONE);
-                                    btnSubmit.setVisibility(View.VISIBLE);
-                                    Log.e("Registration","Success");
+                                    DatabaseReference reference = FirebaseDatabase.getInstance().getReference();       //ths line is for db reference; and it is always compulsory for editing db
+
+                                  //Save data in registration
+                                    User user = new User();
+                                 //   reference.child("Users").setValue()
+
+
+                                    //registrationProgress.setVisibility(View.GONE);
+                                   // btnSubmit.setVisibility(View.VISIBLE);
+                                  //  Log.e("Registration","Success");
                                     Intent it = new Intent(RegistrationActivity.this, Dashboard.class);
                                     startActivity(it);
                                     finish();
@@ -125,29 +118,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                 public void onFailure(@NonNull Exception e) {
                                     registrationProgress.setVisibility(View.GONE);
                                     btnSubmit.setVisibility(View.VISIBLE);
-                                    MaterialDialog mDialog = new MaterialDialog.Builder(RegistrationActivity.this)
-                                            .setTitle("Registration Failed!")
-                                            .setMessage(e.getMessage())
-                                            .setCancelable(false)
-                                            .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int which) {
-                                                    dialogInterface.dismiss();
-                                                    // Delete Operation
-                                                }
-                                            })
-                                            .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int which) {
-                                                    dialogInterface.dismiss();
-                                                }
-                                            })
-                                            .build();
+                                    helpers.showError(RegistrationActivity.this , "Registration Failed!" , e.getMessage());
 
-                                    // Show Dialog
-                                    mDialog.show();
-
-                                    Log.e("Registration","Fail " + e.getMessage());
                                 }
                     });
 
@@ -229,18 +201,5 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
       }
       return flag;
   }
-
-
-    // Check Internet Connection
-
-    private boolean isConnected() {
-        boolean connected = false;
-        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED)
-            connected = true;
-        else
-            connected = false;
-        return  connected;
-    }
 
 }
