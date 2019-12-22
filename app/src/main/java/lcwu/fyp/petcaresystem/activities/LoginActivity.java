@@ -27,6 +27,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Helpers;
+import lcwu.fyp.petcaresystem.director.Session;
+import lcwu.fyp.petcaresystem.model.User;
+
+import static android.util.Log.e;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -115,14 +119,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                               btnLogin.setVisibility(View.VISIBLE);
 
                               DatabaseReference reference  = FirebaseDatabase.getInstance().getReference();  //for database read,write ,delete and update
-                              reference.child("Users").addValueEventListener(new ValueEventListener() {
+                              String id = strEmail.replace("@","-");
+                                      id = id.replace(".","-");
+
+                              reference.child("Users").child(id).addValueEventListener(new ValueEventListener() {
                                   @Override
                                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                                    if(dataSnapshot.getValue() !=null){
+                                        //data is valid
+                                        User u = dataSnapshot.getValue(User.class);
+                                        Session session =new  Session(LoginActivity.this);
+                                        session.setSession(u);
+                                        //start dashboard activity
+                                        Intent intent = new Intent(LoginActivity.this,Dashboard.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                    else
+                                        LoginProgress.setVisibility(View.GONE);
+                                    btnLogin.setVisibility(View.VISIBLE);
+                                 helpers.showError(LoginActivity.this,"Login Failed","Something Went Wrong");
                                   }
 
                                   @Override
                                   public void onCancelled(@NonNull DatabaseError databaseError) {
+                                      LoginProgress.setVisibility(View.GONE);
+                                      btnLogin.setVisibility(View.VISIBLE);
+                                      helpers.showError(LoginActivity.this,"Login Failed","Something Went Wrong");
 
 
                                   }
@@ -139,7 +162,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onFailure(@NonNull Exception e) {
                             LoginProgress.setVisibility(View.GONE);
                             btnLogin.setVisibility(View.VISIBLE);
-                            Log.e("LogIn", "Fail " + e.getMessage());
+                            e("LogIn", "Fail " + e.getMessage());
                             MaterialDialog mDialog = new MaterialDialog.Builder(LoginActivity.this)
                                     .setTitle("Login Failed!")
                                     .setMessage(e.getMessage())
