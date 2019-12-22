@@ -3,17 +3,17 @@ package lcwu.fyp.petcaresystem.model;
 import java.io.Serializable;
 
 public class User implements Serializable {
-    private String firstName, lastName, email, phNo ;
+    private String firstName, lastName, email, phNo ,id ;
 
     public User() {
-
     }
 
-    public User(String firstName, String lastName, String email, String phNo) {
+    public User(String firstName, String lastName, String email, String phNo, String id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phNo = phNo;
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -46,5 +46,13 @@ public class User implements Serializable {
 
     public void setPhNo(String phNo) {
         this.phNo = phNo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

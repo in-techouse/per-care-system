@@ -22,6 +22,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.shreyaspatil.MaterialDialog.MaterialDialog;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
@@ -100,17 +101,30 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                             .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
 
                                 public void onSuccess(AuthResult authResult) {
+
                                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();       //ths line is for db reference; and it is always compulsory for editing db
-
-                                  //Save data in registration
-
                                     final User user = new User();
-                                   reference.child("Users").setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    user.setFirstName(str1stName);
+                                    user.setLastName(strLastName);
+                                    user.setEmail(strEmail);
+                                    user.setPhNo(strPh);
+
+                                    String id= strEmail.replace("@" , "-");
+                                    id = id.replace("." , "_");
+                                    user.setId(id);
+
+
+                                   reference.child("Users").child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                        @Override
                                        public void onSuccess(Void aVoid) {
                                            Session session = new Session(RegistrationActivity.this);
                                            session.setSession(user);
-                                           //Start Dashboard Activity
+
+                                           //start dashboard activity
+                                           Intent intent = new Intent(RegistrationActivity.this , Dashboard.class);
+                                           startActivity(intent);
+                                           finish();
+
                                        }
                                    }).addOnFailureListener(new OnFailureListener() {
                                        @Override
