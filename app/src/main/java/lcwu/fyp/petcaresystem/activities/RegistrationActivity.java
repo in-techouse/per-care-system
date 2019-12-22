@@ -27,6 +27,7 @@ import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Helpers;
+import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.User;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
@@ -102,9 +103,25 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                     DatabaseReference reference = FirebaseDatabase.getInstance().getReference();       //ths line is for db reference; and it is always compulsory for editing db
 
                                   //Save data in registration
-                                    User user = new User();
-                                 //   reference.child("Users").setValue()
 
+                                    final User user = new User();
+                                   reference.child("Users").setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                       @Override
+                                       public void onSuccess(Void aVoid) {
+                                           Session session = new Session(RegistrationActivity.this);
+                                           session.setSession(user);
+                                           //Start Dashboard Activity
+                                       }
+                                   }).addOnFailureListener(new OnFailureListener() {
+                                       @Override
+                                       public void onFailure(@NonNull Exception e) {
+
+                                           registrationProgress.setVisibility(View.GONE);
+                                           btnSubmit.setVisibility(View.VISIBLE);
+                                           helpers.showError(RegistrationActivity.this , "Registration Failed!" , e.getMessage());
+                                       }
+
+                                   });
 
                                     //registrationProgress.setVisibility(View.GONE);
                                    // btnSubmit.setVisibility(View.VISIBLE);
