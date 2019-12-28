@@ -120,12 +120,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                               DatabaseReference reference  = FirebaseDatabase.getInstance().getReference();  //for database read,write ,delete and update
                               String id = strEmail.replace("@","-");
-                                      id = id.replace(".","-");
+                              id = id.replace(".","_");
 
                               reference.child("Users").child(id).addValueEventListener(new ValueEventListener() {
                                   @Override
                                   public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                      Log.e("Login", dataSnapshot.toString());
                                     if(dataSnapshot.getValue() !=null){
+                                        Log.e("Login", dataSnapshot.getValue().toString());
                                         //data is valid
                                         User u = dataSnapshot.getValue(User.class);
                                         Session session =new  Session(LoginActivity.this);
