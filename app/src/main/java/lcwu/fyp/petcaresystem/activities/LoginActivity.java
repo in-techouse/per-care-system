@@ -17,13 +17,13 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.shreyaspatil.MaterialDialog.MaterialDialog;
-import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.shreyaspatil.MaterialDialog.MaterialDialog;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Helpers;
@@ -70,29 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnLogin:{
                 boolean flag1 = helpers.isConnected(LoginActivity.this);
                 if(!flag1){
-
-
-                    MaterialDialog mDialog = new MaterialDialog.Builder(LoginActivity.this)
-                            .setTitle("Internet Connection Error")
-                            .setMessage("Not Connected To Internet! Check Your Connection And Try Again")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int which) {
-                                   dialogInterface.dismiss();
-                                    // Delete Operation
-                                }
-                            })
-                            .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int which) {
-                                    dialogInterface.dismiss();
-                                }
-                            })
-                            .build();
-
-                    // Show Dialog
-                    mDialog.show();
+                    helpers.showError(LoginActivity.this, "Internet Connection Error", "Not Connected To Internet! Check Your Connection And Try Again");
                     return;
                 }
 
@@ -100,7 +78,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 strEmail = edtEmail.getText().toString();
 
                 strPassword = edtPassword.getText().toString();
-
 
                 boolean flag = isValid();
                 if (flag)
@@ -111,89 +88,60 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     auth.signInWithEmailAndPassword(strEmail, strPassword)
-
-                      .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
-                          @Override
-                          public void onSuccess(AuthResult authResult) {
-                              LoginProgress.setVisibility(View.GONE);
-                              btnLogin.setVisibility(View.VISIBLE);
-
-                              DatabaseReference reference  = FirebaseDatabase.getInstance().getReference();  //for database read,write ,delete and update
-                              String id = strEmail.replace("@","-");
-                              id = id.replace(".","_");
-
-                              reference.child("Users").child(id).addValueEventListener(new ValueEventListener() {
-                                  @Override
-                                  public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                      Log.e("Login", dataSnapshot.toString());
-                                    if(dataSnapshot.getValue() !=null){
-                                        Log.e("Login", dataSnapshot.getValue().toString());
-                                        //data is valid
-                                        User u = dataSnapshot.getValue(User.class);
-                                        Session session =new  Session(LoginActivity.this);
-                                        session.setSession(u);
-                                        //start dashboard activity
-                                        Intent intent = new Intent(LoginActivity.this,Dashboard.class);
-                                        startActivity(intent);
-                                        finish();
-                                    }
-                                    else
-                                        LoginProgress.setVisibility(View.GONE);
+                            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                                @Override
+                                public void onSuccess(AuthResult authResult) {
+                                    LoginProgress.setVisibility(View.GONE);
                                     btnLogin.setVisibility(View.VISIBLE);
-                                 helpers.showError(LoginActivity.this,"Login Failed","Something Went Wrong");
-                                  }
 
-                                  @Override
-                                  public void onCancelled(@NonNull DatabaseError databaseError) {
-                                      LoginProgress.setVisibility(View.GONE);
-                                      btnLogin.setVisibility(View.VISIBLE);
-                                      helpers.showError(LoginActivity.this,"Login Failed","Something Went Wrong");
+                                    DatabaseReference reference  = FirebaseDatabase.getInstance().getReference();  //for database read,write ,delete and update
+                                    String id = strEmail.replace("@","-");
+                                    id = id.replace(".","_");
+
+                                    reference.child("Users").child(id).addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            Log.e("Login", dataSnapshot.toString());
+                                            if(dataSnapshot.getValue() !=null){
+                                                Log.e("Login", dataSnapshot.getValue().toString());
+                                                //data is valid
+                                                User u = dataSnapshot.getValue(User.class);
+                                                Session session =new  Session(LoginActivity.this);
+                                                session.setSession(u);
+                                                //start dashboard activity
+                                                Intent intent = new Intent(LoginActivity.this,Dashboard.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                            else
+                                                LoginProgress.setVisibility(View.GONE);
+                                            btnLogin.setVisibility(View.VISIBLE);
+                                            helpers.showError(LoginActivity.this,"Login Failed","Something Went Wrong");
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                                            LoginProgress.setVisibility(View.GONE);
+                                            btnLogin.setVisibility(View.VISIBLE);
+                                            helpers.showError(LoginActivity.this,"Login Failed","Something Went Wrong");
+
+                                        }
+                                    });          //use capital letters and always plural
 
 
-                                  }
-                              });          //use capital letters and always plural
-
-//                              LoginProgress.setVisibility(View.GONE);
-//                              btnLogin.setVisibility(View.VISIBLE);
-//                              Log.e("LogIn", "Success");
-
-
-                          }
-                      }).addOnFailureListener(new OnFailureListener() {
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             LoginProgress.setVisibility(View.GONE);
                             btnLogin.setVisibility(View.VISIBLE);
-                            e("LogIn", "Fail " + e.getMessage());
-                            MaterialDialog mDialog = new MaterialDialog.Builder(LoginActivity.this)
-                                    .setTitle("Login Failed!")
-                                    .setMessage(e.getMessage())
-                                    .setCancelable(false)
-                                    .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int which) {
-                                            dialogInterface.dismiss();
-                                            // Delete Operation
-                                        }
-                                    })
-                                    .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialogInterface, int which) {
-                                            dialogInterface.dismiss();
-                                        }
-                                    })
-                                    .build();
-
-                            // Show Dialog
-                            mDialog.show();
+                            helpers.showError(LoginActivity.this, "ERROR", e.getMessage());
                         }
                     });
-
 
                 }
 
                 break;
-
             }
             case R.id.go_To_Signup:{
                 Intent it = new Intent( LoginActivity.this, RegistrationActivity.class);
@@ -230,6 +178,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
         return Flag;
     }
+
 
 
 }

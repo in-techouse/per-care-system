@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 
 import lcwu.fyp.petcaresystem.R;
+import lcwu.fyp.petcaresystem.director.Session;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -25,9 +26,19 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onFinish()
             {
-                Intent it = new Intent(SplashActivity.this, LoginActivity.class);
-                startActivity(it);
-                finish();
+                Session session= new Session(SplashActivity.this);
+                if(session.getUser() == null){
+                    Intent it = new Intent(SplashActivity.this, LoginActivity.class);
+                    startActivity(it);
+                    finish();
+
+                }
+                else{
+                    Intent it = new Intent(SplashActivity.this, Dashboard.class);
+                    startActivity(it);
+                    finish();
+
+                }
 
             }
         }.start();
