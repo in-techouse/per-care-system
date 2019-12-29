@@ -26,7 +26,8 @@ public class DoctorFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_doctor, container, false);
+        View root= inflater.inflate(R.layout.fragment_doctor, container, false);
+        return root;
     }
 
 }
