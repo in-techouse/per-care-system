@@ -25,8 +25,8 @@ public class FoodFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View root = inflater.inflate(R.layout.fragment_food, container, false);
-        return  root;
+        View v = inflater.inflate(R.layout.fragment_food, container, false);
+        return  v;
     }
 
 }

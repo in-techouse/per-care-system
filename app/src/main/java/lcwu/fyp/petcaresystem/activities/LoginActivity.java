@@ -63,13 +63,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         int id = v.getId();
 
-        switch (id){
+        switch (id)
+        {
             case R.id.btnLogin:{
                 boolean flag1 = helpers.isConnected(LoginActivity.this);
-                if(!flag1){
+                if(!flag1)
+                {
                     helpers.showError(LoginActivity.this, "Internet Connection Error", "Not Connected To Internet! Check Your Connection And Try Again");
                     return;
                 }
@@ -88,9 +91,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     FirebaseAuth auth = FirebaseAuth.getInstance();
                     auth.signInWithEmailAndPassword(strEmail, strPassword)
-                            .addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                            .addOnSuccessListener(new OnSuccessListener<AuthResult>()
+                            {
                                 @Override
-                                public void onSuccess(AuthResult authResult) {
+                                public void onSuccess(AuthResult authResult)
+                                {
                                     LoginProgress.setVisibility(View.GONE);
                                     btnLogin.setVisibility(View.VISIBLE);
 
@@ -158,27 +163,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
-    private boolean isValid(){
+    private boolean isValid()
+    {
         boolean Flag = true;
 
-        if (strEmail.length()<6 || ! Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()){
+        if (strEmail.length()<6 || ! Patterns.EMAIL_ADDRESS.matcher(strEmail).matches())
+        {
             edtEmail.setError("Enter A Valid Email");
             Flag = false;
         }
-        else {
+        else
+            {
             edtEmail.setError(null);
         }
 
-        if (strPassword.length()<6){
+        if (strPassword.length()<6)
+        {
             edtPassword.setError("Enter A Valid Password");
             Flag = false;
         }
-        else {
+        else
+            {
             edtPassword.setError(null);
         }
         return Flag;
     }
-
-
 
 }
