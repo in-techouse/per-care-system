@@ -17,27 +17,25 @@ import lcwu.fyp.petcaresystem.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClinicFragment extends Fragment {
-
+public class OrderFragment extends Fragment {
 
 
     private LinearLayout loading;
-    private TextView noClinic;
-    private RecyclerView clinics;
+    private TextView noOrder;
+    private RecyclerView orders;
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =inflater.inflate(R.layout.fragment_clinic, container, false);
+        View root = inflater.inflate(R.layout.fragment_order, container, false);
+
+        loading = root.findViewById(R.id.Loading);
+        noOrder = root.findViewById(R.id.noOrder);
+        orders = root.findViewById(R.id.orders);
 
 
-        loading = v.findViewById(R.id.Loading);
-        noClinic = v.findViewById(R.id.noClinic);
-        clinics = v.findViewById(R.id.clinics);
-
-        return v;
+        return root;
     }
 
 }

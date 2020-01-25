@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.ClinicFragment"
-    android:orientation="vertical">
+    tools:context=".fragments.OrderFragment">
 
 
     <LinearLayout
@@ -20,13 +19,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="20dp"
             android:id="@+id/progress"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Loading Clinics"
+            android:text="Loading Orders"
             android:layout_margin="7dp"
             android:padding="7dp"
             android:textAlignment="center"/>
@@ -35,22 +33,24 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Clinics Found"
+        android:text="No Orders Found"
         android:layout_margin="7dp"
         android:padding="7dp"
         android:textAlignment="center"
-        android:id="@+id/noClinic"
+        android:id="@+id/noOrder"
         android:layout_alignParentTop="true"
         android:visibility="gone"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/clinics"
+        android:id="@+id/orders"
         android:layout_alignParentTop="true"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:visibility="gone"/>
+
+
 
 </RelativeLayout>
