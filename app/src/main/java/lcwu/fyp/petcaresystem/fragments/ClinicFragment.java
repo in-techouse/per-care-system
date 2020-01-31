@@ -78,6 +78,23 @@ public class ClinicFragment extends Fragment {
         reference.orderByChild("userId").equalTo(user.getId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot d: dataSnapshot.getChildren()){
+                    Clinic c = d.getValue(Clinic.class);
+                    if (c != null) {
+                        data.add(c);
+                    }
+                }
+                if (data.size()>0){
+                    clinics.setVisibility(View.VISIBLE);
+                    noClinic.setVisibility(View.GONE);
+                }
+                else{
+                    clinics.setVisibility(View.GONE);
+                    noClinic.setVisibility(View.VISIBLE);
+                }
+                loading.setVisibility(View.GONE);
+
+
 
             }
 
