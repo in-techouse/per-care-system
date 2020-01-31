@@ -75,8 +75,24 @@ public class DoctorFragment extends Fragment {
         reference.orderByChild("userId").equalTo(user.getId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                for(DataSnapshot d: dataSnapshot.getChildren()){
+                    Doctor doc = d.getValue(Doctor.class);
+                    if (doc != null)  {
+                        data.add(doc);
+                    }
+                }
+                if (data.size()>0){
+                    doctors.setVisibility(View.VISIBLE);
+                    noDoctor.setVisibility(View.GONE);
+                }
+                else{
+                    doctors.setVisibility(View.GONE);
+                    noDoctor.setVisibility(View.VISIBLE);
+                }
+                loading.setVisibility(View.GONE);
             }
+
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
