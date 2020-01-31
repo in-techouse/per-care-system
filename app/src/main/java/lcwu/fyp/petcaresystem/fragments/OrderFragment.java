@@ -75,7 +75,21 @@ public class OrderFragment extends Fragment {
         reference.orderByChild("userId").equalTo(user.getId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-              for(DataSnapshot )
+              for(DataSnapshot d: dataSnapshot.getChildren()){
+                  Order o = d.getValue(Order.class);
+                  if (o != null)  {
+                      data.add(o);
+                  }
+              }
+              if (data.size()>0){
+                  orders.setVisibility(View.VISIBLE);
+                  noOrder.setVisibility(View.GONE);
+                }
+              else{
+                  orders.setVisibility(View.GONE);
+                  noOrder.setVisibility(View.VISIBLE);
+                }
+              loading.setVisibility(View.GONE);
             }
 
             @Override
