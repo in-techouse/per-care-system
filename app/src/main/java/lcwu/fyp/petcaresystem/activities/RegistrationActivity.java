@@ -108,7 +108,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                     user.setLastName(strLastName);
                                     user.setEmail(strEmail);
                                     user.setPhNo(strPh);
-
+                                    user.setQualification("");
+                                    user.setRole(1);
                                     String id= strEmail.replace("@" , "-");
                                     id = id.replace("." , "_");
                                     user.setId(id);
