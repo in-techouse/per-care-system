@@ -138,12 +138,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                                    });
 
-                                    //registrationProgress.setVisibility(View.GONE);
-                                   // btnSubmit.setVisibility(View.VISIBLE);
-                                  //  Log.e("Registration","Success");
-                                    Intent it = new Intent(RegistrationActivity.this, Dashboard.class);
-                                    startActivity(it);
-                                    finish();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override

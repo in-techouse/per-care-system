@@ -133,13 +133,6 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
                                         }
 
                                     });
-
-                                    //registrationProgress.setVisibility(View.GONE);
-                                    // btnSubmit.setVisibility(View.VISIBLE);
-                                    //  Log.e("Registration","Success");
-                                    Intent it = new Intent(DoctorRegistration.this, Dashboard.class);
-                                    startActivity(it);
-                                    finish();
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                         @Override
