@@ -19,7 +19,8 @@
         android:background="?android:attr/windowBackground"
         app:menu="@menu/bottom_nav_menu" />
 
-    <androidx.viewpager.widget.ViewPager
+
+        <androidx.viewpager.widget.ViewPager
         android:layout_alignParentTop="true"
         android:layout_above="@id/nav_view"
         android:id="@+id/pager"

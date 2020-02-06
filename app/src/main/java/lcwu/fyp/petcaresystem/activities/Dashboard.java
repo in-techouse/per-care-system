@@ -1,19 +1,22 @@
 package lcwu.fyp.petcaresystem.activities;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import android.util.Log;
+import android.view.MenuItem;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
+import android.app.FragmentTransaction;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.fragments.ClinicFragment;
@@ -21,8 +24,10 @@ import lcwu.fyp.petcaresystem.fragments.DoctorFragment;
 import lcwu.fyp.petcaresystem.fragments.FoodFragment;
 import lcwu.fyp.petcaresystem.fragments.PetFragment;
 import lcwu.fyp.petcaresystem.fragments.ProfileFragment;
+import lcwu.fyp.petcaresystem.ui.home.HomeFragment;
+import lcwu.fyp.petcaresystem.ui.notifications.NotificationsFragment;
 
-public class Dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private ViewPager pager;
     private BottomNavigationView navView;
@@ -46,8 +51,45 @@ public class Dashboard extends AppCompatActivity {
 
 
 
+        navView.setOnNavigationItemSelectedListener(this);
+
+
         adapter = new PagerAdapter(getSupportFragmentManager(), 1);
         pager.setAdapter(adapter);
+
+
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        navView.getMenu().findItem(R.id.navigation_food).setChecked(true);
+                        break;
+                    case 1:
+                        navView.getMenu().findItem(R.id.navigation_doctor).setChecked(true);
+                        break;
+                    case 2:
+                        navView.getMenu().findItem(R.id.navigation_clinic).setChecked(true);
+                        break;
+                    case 3:
+                        navView.getMenu().findItem(R.id.navigation_notification).setChecked(true);
+                        break;
+                    case 4:
+                        navView.getMenu().findItem(R.id.navigation_profile).setChecked(true);
+                        break;
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -59,37 +101,52 @@ public class Dashboard extends AppCompatActivity {
 //        NavigationUI.setupWithNavController(navView, navController);
     }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+
     class PagerAdapter extends FragmentPagerAdapter{
 
         public PagerAdapter(@NonNull FragmentManager fm, int behavior) {
             super(fm, behavior);
         }
 
-        @NonNull
+            @NonNull
         @Override
         public Fragment getItem(int position) {
-            switch (position)
+                Fragment fragment;
+                switch (position)
             {
                 case  0:
                 {
-                    return food;
+                    Log.e("Click" , "food Clicked");
+                    fragment = new FoodFragment();
+                    return fragment;
                 }
                 case  1:
                 {
-                    return doctor;
+                    fragment = new DoctorFragment();
+                    Log.e("click" , "doctor Clicked");
+                    return fragment;
                 }
 
                 case 2:
                 {
-                    return clinic;
+                    fragment = new ClinicFragment();
+                    Log.e("click" , "clinic click");
+                    return fragment;
                 }
                 case 3:
                 {
-                    return pet;
+                    fragment = new NotificationsFragment();
+                    return fragment;
                 }
                 case 4:
                 {
-                    return profileFragment;
+                    fragment = new ProfileFragment();
+                    return fragment;
                 }
             }
             return null;
@@ -99,5 +156,36 @@ public class Dashboard extends AppCompatActivity {
         public int getCount() {
             return 5;
         }
+
+        @Override
+        public int getItemPosition(@NonNull Object object) {
+            return POSITION_NONE;
+        }
+    }
+
+
+
+
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+        switch (menuItem.getItemId()) {
+            case R.id.navigation_food:
+                pager.setCurrentItem(0);
+                break;
+            case R.id.navigation_doctor:
+                pager.setCurrentItem(1);
+                break;
+            case R.id.navigation_clinic:
+                pager.setCurrentItem(2);
+                break;
+            case R.id.navigation_notification:
+                pager.setCurrentItem(3);
+                break;
+            case R.id.navigation_profile:
+                pager.setCurrentItem(4);
+                break;
+        }
+
+        return true;
     }
 }

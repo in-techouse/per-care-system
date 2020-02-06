@@ -121,7 +121,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 finish();
                                             }
                                             else
-                                                LoginProgress.setVisibility(View.GONE);
+                                                Log.e("login" , "in inner else");
+                                            LoginProgress.setVisibility(View.GONE);
                                             btnLogin.setVisibility(View.VISIBLE);
                                             helpers.showError(LoginActivity.this,"Login Failed","Something Went Wrong");
                                         }
@@ -130,6 +131,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         public void onCancelled(@NonNull DatabaseError databaseError) {
                                             LoginProgress.setVisibility(View.GONE);
                                             btnLogin.setVisibility(View.VISIBLE);
+                                            Log.e("login" , "on Canceleld");
                                             helpers.showError(LoginActivity.this,"Login Failed","Something Went Wrong");
 
                                         }
@@ -142,6 +144,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         public void onFailure(@NonNull Exception e) {
                             LoginProgress.setVisibility(View.GONE);
                             btnLogin.setVisibility(View.VISIBLE);
+                            Log.e("login" , "in failure listerner");
                             helpers.showError(LoginActivity.this, "ERROR", e.getMessage());
                         }
                     });

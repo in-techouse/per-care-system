@@ -16,6 +16,7 @@ import android.widget.TextView;
 import java.util.jar.Attributes;
 
 import lcwu.fyp.petcaresystem.R;
+import lcwu.fyp.petcaresystem.activities.EditUserProfile;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.User;
 
@@ -64,10 +65,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         switch (id)
         {
             case R.id.edit:{
-                Intent it= new Intent( getActivity(), ProfileFragment.class);
+                Intent it= new Intent( getActivity(), EditUserProfile.class);
                 startActivity(it);
                 break;
-
             }
         }
 

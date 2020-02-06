@@ -1,17 +1,20 @@
 package lcwu.fyp.petcaresystem.model;
 
+import android.net.Uri;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
     private String firstName, lastName, email, phNo, id, qualification;
     private int role;
+    private Uri imageUri;
     // role == 1, User,
     // role == 2, Doctor,
 
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String phNo, String id, int role, String qualification) {
+    public User(String firstName, String lastName, String email, String phNo, String id, int role, String qualification , Uri imageUri) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -19,12 +22,15 @@ public class User implements Serializable {
         this.id = id;
         this.role = role;
         this.qualification = qualification;
+        this.imageUri = imageUri;
+
     }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setImageUri(Uri imageUri){this.imageUri = imageUri;}
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -60,6 +66,8 @@ public class User implements Serializable {
     public void setId(String id) {
         this.id = id;
     }
+
+    public Uri getImageUri(){return imageUri;}
 
     public int getRole() {
         return role;

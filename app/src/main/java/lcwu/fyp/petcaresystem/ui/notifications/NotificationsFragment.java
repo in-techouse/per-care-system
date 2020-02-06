@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import lcwu.fyp.petcaresystem.R;
+import lcwu.fyp.petcaresystem.fragments.ClinicFragment;
 
 public class NotificationsFragment extends Fragment {
 
@@ -23,6 +24,11 @@ public class NotificationsFragment extends Fragment {
     private LinearLayout loading;
     private TextView noNotification;
     private RecyclerView notifications;
+
+    public static NotificationsFragment newInstance() {
+        NotificationsFragment myFragment = new NotificationsFragment();
+        return myFragment;
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_notifications, container, false);

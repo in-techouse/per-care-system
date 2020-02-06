@@ -13,8 +13,15 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import lcwu.fyp.petcaresystem.R;
+import lcwu.fyp.petcaresystem.fragments.ClinicFragment;
 
 public class HomeFragment extends Fragment {
+
+    public static HomeFragment newInstance() {
+        HomeFragment myFragment = new HomeFragment();
+
+        return myFragment;
+    }
 
     private HomeViewModel homeViewModel;
 

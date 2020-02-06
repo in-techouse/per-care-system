@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,13 @@ public class ClinicFragment extends Fragment {
     private Helpers helpers;
     private List<Clinic> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Clinics");
+
+    public static ClinicFragment newInstance() {
+        ClinicFragment myFragment = new ClinicFragment();
+
+        return myFragment;
+    }
+
 
 
 
@@ -109,6 +117,4 @@ public class ClinicFragment extends Fragment {
 
         });
     }
-
-
-    }
+  }

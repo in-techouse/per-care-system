@@ -44,6 +44,13 @@ public class DoctorFragment extends Fragment {
     private List<Doctor> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Doctors");
 
+    public static DoctorFragment newInstance() {
+        DoctorFragment myFragment = new DoctorFragment();
+
+        return myFragment;
+    }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

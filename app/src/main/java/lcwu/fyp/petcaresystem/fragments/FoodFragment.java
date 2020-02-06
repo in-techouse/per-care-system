@@ -44,6 +44,12 @@ public class FoodFragment extends Fragment {
     private List<Food> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Foods");
 
+    public static FoodFragment newInstance() {
+        FoodFragment myFragment = new FoodFragment();
+        return myFragment;
+    }
+
+
 
 
     @Override
