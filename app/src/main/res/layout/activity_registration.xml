@@ -17,13 +17,15 @@
 
 
     <TextView
-        android:text="Registration Screen"
+        android:textStyle="bold"
         android:textSize="22sp"
+        android:textAllCaps="true"
+        android:textColor="@color/colorPrimaryDark"
+        android:text="Registration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:padding="12dp"
-        android:textColor="#9C089C"/>
+        android:padding="12dp"/>
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -144,7 +146,7 @@
 
     <TextView
         android:textColor="@color/colorPrimary"
-        android:text="Already have an Account? Click here to login"
+        android:text="@string/already_have_an_account_click_here_to_login"
         android:layout_margin="35dp"
         android:padding="12dp"
         android:textAlignment="center"

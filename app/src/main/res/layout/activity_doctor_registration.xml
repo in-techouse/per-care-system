@@ -160,7 +160,7 @@
 
         <TextView
             android:textColor="@color/colorPrimary"
-            android:text="Already have an Account? Click here to login"
+            android:text="@string/already_have_an_account_click_here_to_login"
             android:layout_margin="35dp"
             android:padding="12dp"
             android:textAlignment="center"

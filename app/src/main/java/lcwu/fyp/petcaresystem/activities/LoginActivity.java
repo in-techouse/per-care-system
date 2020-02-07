@@ -2,7 +2,6 @@ package lcwu.fyp.petcaresystem.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
@@ -22,15 +20,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.shreyaspatil.MaterialDialog.MaterialDialog;
-import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
-
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.User;
-
-import static android.util.Log.e;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -116,7 +109,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 Session session =new  Session(LoginActivity.this);
                                                 session.setSession(u);
                                                 //start dashboard activity
-                                                Intent intent = new Intent(LoginActivity.this,Dashboard.class);
+                                                Intent intent = new Intent(LoginActivity.this, Dashboard.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                 startActivity(intent);
                                                 finish();
                                             }

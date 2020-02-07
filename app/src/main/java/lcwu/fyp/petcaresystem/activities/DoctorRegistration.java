@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -151,8 +152,7 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
 
             case R.id.go_To_Login:
             {
-                Intent it= new Intent(DoctorRegistration.this, LoginActivity.class);
-                startActivity(it);
+                finish();
                 break;
             }
 
@@ -232,7 +232,21 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
     }
 
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                break;
+            }
+        }
+        return true;
+    }
 
 
 }

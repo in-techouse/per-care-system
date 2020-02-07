@@ -10,6 +10,7 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Patterns;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -123,6 +124,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                                            //start dashboard activity
                                            Intent intent = new Intent(RegistrationActivity.this , Dashboard.class);
+                                           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                            startActivity(intent);
                                            finish();
 
@@ -156,8 +158,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
             case R.id.go_To_Login:
          {
-             Intent it= new Intent(RegistrationActivity.this, LoginActivity.class);
-             startActivity(it);
+             finish();
              break;
          }
 
@@ -228,4 +229,19 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
       return flag;
   }
 
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home: {
+                finish();
+                break;
+            }
+        }
+        return true;
+    }
 }
