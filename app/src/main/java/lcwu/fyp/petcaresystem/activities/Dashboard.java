@@ -22,6 +22,7 @@ import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.fragments.ClinicFragment;
 import lcwu.fyp.petcaresystem.fragments.DoctorFragment;
 import lcwu.fyp.petcaresystem.fragments.FoodFragment;
+import lcwu.fyp.petcaresystem.fragments.OrderFragment;
 import lcwu.fyp.petcaresystem.fragments.PetFragment;
 import lcwu.fyp.petcaresystem.fragments.ProfileFragment;
 import lcwu.fyp.petcaresystem.ui.home.HomeFragment;
@@ -32,22 +33,24 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
     private ViewPager pager;
     private BottomNavigationView navView;
     private PagerAdapter adapter;
-    private PetFragment pet;
     private ClinicFragment clinic;
     private DoctorFragment  doctor;
     private FoodFragment food;
     private ProfileFragment profileFragment;
+    private OrderFragment orderFragment;
+    private NotificationsFragment notificationsFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         navView = findViewById(R.id.nav_view);
         pager = findViewById(R.id.pager);
-        pet = new PetFragment();
         clinic = new ClinicFragment();
         doctor = new DoctorFragment();
         food = new FoodFragment();
         profileFragment = new ProfileFragment();
+        orderFragment = new OrderFragment();
+        notificationsFragment = new NotificationsFragment();
 
 
 
@@ -77,9 +80,12 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
                         navView.getMenu().findItem(R.id.navigation_clinic).setChecked(true);
                         break;
                     case 3:
-                        navView.getMenu().findItem(R.id.navigation_notification).setChecked(true);
+                        navView.getMenu().findItem(R.id.navigation_order).setChecked(true);
                         break;
                     case 4:
+                        navView.getMenu().findItem(R.id.navigation_notification).setChecked(true);
+                        break;
+                    case 5:
                         navView.getMenu().findItem(R.id.navigation_profile).setChecked(true);
                         break;
                 }
@@ -116,37 +122,34 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
             @NonNull
         @Override
         public Fragment getItem(int position) {
-                Fragment fragment;
-                switch (position)
+            switch (position)
             {
                 case  0:
                 {
                     Log.e("Click" , "food Clicked");
-                    fragment = new FoodFragment();
-                    return fragment;
+                    return food;
                 }
                 case  1:
                 {
-                    fragment = new DoctorFragment();
                     Log.e("click" , "doctor Clicked");
-                    return fragment;
+                    return doctor;
                 }
 
                 case 2:
                 {
-                    fragment = new ClinicFragment();
                     Log.e("click" , "clinic click");
-                    return fragment;
+                    return clinic;
                 }
                 case 3:
                 {
-                    fragment = new NotificationsFragment();
-                    return fragment;
+                    return orderFragment;
                 }
                 case 4:
                 {
-                    fragment = new ProfileFragment();
-                    return fragment;
+                    return notificationsFragment;
+                }
+                case 5:{
+                    return profileFragment;
                 }
             }
             return null;
@@ -178,11 +181,14 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
             case R.id.navigation_clinic:
                 pager.setCurrentItem(2);
                 break;
-            case R.id.navigation_notification:
+            case R.id.navigation_order:
                 pager.setCurrentItem(3);
                 break;
-            case R.id.navigation_profile:
+            case R.id.navigation_notification:
                 pager.setCurrentItem(4);
+                break;
+            case R.id.navigation_profile:
+                pager.setCurrentItem(5);
                 break;
         }
 
