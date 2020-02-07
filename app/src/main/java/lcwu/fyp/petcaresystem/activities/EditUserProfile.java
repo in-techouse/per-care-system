@@ -180,6 +180,7 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         File file = new File(selectedMediaUri.getPath());
          Log.e("file" , "in file object value "+file.toString());
         Log.e("Profile", "Uri: " + selectedMediaUri.getPath() + " File: " + file.exists());
+//
 //        if(!file.exists()){
 //            Log.e("Uri" , "file not exists showing error");
 //            registrationProgress.setVisibility(View.GONE);

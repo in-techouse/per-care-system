@@ -14,8 +14,11 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import de.hdodenhof.circleimageview.CircleImageView;
 import lcwu.fyp.petcaresystem.R;
+import lcwu.fyp.petcaresystem.activities.Appointments;
 import lcwu.fyp.petcaresystem.activities.EditUserProfile;
 import lcwu.fyp.petcaresystem.activities.LoginActivity;
+import lcwu.fyp.petcaresystem.activities.Notifications;
+import lcwu.fyp.petcaresystem.activities.Orders;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.User;
 
@@ -27,7 +30,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Session session;
     private User user;
     private TextView name, email, phone;
-    private CardView edit, notificaiton, order, logout;
+    private CardView edit,orders, notificaitons, appointments, logout;
     private CircleImageView profile_image;
 
     public ProfileFragment() {
@@ -50,8 +53,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         phone= v.findViewById(R.id.phnNumber);
         edit= v.findViewById(R.id.edit);
         profile_image = v.findViewById(R.id.profile_image);
-        order = v.findViewById(R.id.order);
-        notificaiton = v.findViewById(R.id.notification);
+        orders = v.findViewById(R.id.orders);
+        notificaitons = v.findViewById(R.id.notifications);
+        appointments = v.findViewById(R.id.appointments);
         logout = v.findViewById(R.id.logout);
 
         if(user.getImage() != null && !user.getImage().equalsIgnoreCase("")){
@@ -62,8 +66,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         email.setText(user.getEmail());
         phone.setText(user.getPhNo());
         edit.setOnClickListener(this);
-        order.setOnClickListener(this);
-        notificaiton.setOnClickListener(this);
+        orders.setOnClickListener(this);
+        notificaitons.setOnClickListener(this);
+        appointments.setOnClickListener(this);
         logout.setOnClickListener(this);
         return  v;
     }
@@ -77,12 +82,22 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                 startActivity(it);
                 break;
             }
-            case R.id.order:{
+            case R.id.orders:{
                 Log.e("Profile", "Order");
+                Intent it = new Intent(getActivity() , Orders.class);
+                startActivity(it);
                 break;
             }
-            case R.id.notification:{
+            case R.id.notifications:{
                 Log.e("Profile", "Notifications");
+                Intent it = new Intent(getActivity() , Notifications.class);
+                startActivity(it);
+                break;
+            }
+            case R.id.appointments:{
+                Log.e("Profile", "Appointments");
+                Intent it = new Intent(getActivity() , Appointments.class);
+                startActivity(it);
                 break;
             }
             case R.id.logout:{

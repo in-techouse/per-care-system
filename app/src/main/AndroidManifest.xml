@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -16,22 +16,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        android:windowSoftInputMode="stateHidden">
-
-        <activity android:name=".activities.DoctorRegistration" android:parentActivityName=".activities.LoginActivity"/>
+        android:windowSoftInputMode="stateHidden"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.Appointments"></activity>
+        <activity android:name=".activities.Orders" />
+        <activity android:name=".activities.Notifications" />
+        <activity
+            android:name=".activities.DoctorRegistration"
+            android:parentActivityName=".activities.LoginActivity" />
         <activity
             android:name=".activities.Dashboard"
             android:label="@string/title_activity_dashboard"
-            android:launchMode="singleInstance"/>
-        <activity android:name=".activities.FPasswordActivity" android:parentActivityName=".activities.LoginActivity"/>
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".activities.FPasswordActivity"
+            android:parentActivityName=".activities.LoginActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.RegistrationActivity" android:parentActivityName=".activities.LoginActivity"/>
+        <activity
+            android:name=".activities.RegistrationActivity"
+            android:parentActivityName=".activities.LoginActivity" />
         <activity
             android:name=".activities.EditUserProfile"
             android:label="@string/title_activity_edit_user_profile"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".activities.Dashboard"/>
+            android:parentActivityName=".activities.Dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.SplashActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
