@@ -145,9 +145,9 @@
 
 
     <TextView
+        android:layout_marginTop="5dp"
         android:textColor="@color/colorPrimary"
         android:text="@string/already_have_an_account_click_here_to_login"
-        android:layout_margin="35dp"
         android:padding="12dp"
         android:textAlignment="center"
         android:id="@+id/go_To_Login"

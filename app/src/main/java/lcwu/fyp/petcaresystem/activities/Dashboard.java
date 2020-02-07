@@ -1,15 +1,11 @@
 package lcwu.fyp.petcaresystem.activities;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
-import android.app.FragmentTransaction;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -22,11 +18,7 @@ import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.fragments.ClinicFragment;
 import lcwu.fyp.petcaresystem.fragments.DoctorFragment;
 import lcwu.fyp.petcaresystem.fragments.FoodFragment;
-import lcwu.fyp.petcaresystem.fragments.OrderFragment;
-import lcwu.fyp.petcaresystem.fragments.PetFragment;
 import lcwu.fyp.petcaresystem.fragments.ProfileFragment;
-import lcwu.fyp.petcaresystem.ui.home.HomeFragment;
-import lcwu.fyp.petcaresystem.ui.notifications.NotificationsFragment;
 
 public class Dashboard extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 

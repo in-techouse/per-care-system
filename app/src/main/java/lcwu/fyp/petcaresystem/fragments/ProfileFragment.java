@@ -3,20 +3,19 @@ package lcwu.fyp.petcaresystem.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigator;
-
-import android.view.FrameStats;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import java.util.jar.Attributes;
-
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import de.hdodenhof.circleimageview.CircleImageView;
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.activities.EditUserProfile;
+import lcwu.fyp.petcaresystem.activities.LoginActivity;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.User;
 
@@ -28,7 +27,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Session session;
     private User user;
     private TextView name, email, phone;
-    private TextView edit;
+    private CardView edit, notificaiton, order, logout;
+    private CircleImageView profile_image;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -49,31 +49,53 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         email= v.findViewById(R.id.email);
         phone= v.findViewById(R.id.phnNumber);
         edit= v.findViewById(R.id.edit);
+        profile_image = v.findViewById(R.id.profile_image);
+        order = v.findViewById(R.id.order);
+        notificaiton = v.findViewById(R.id.notification);
+        logout = v.findViewById(R.id.logout);
+
+        if(user.getImage() != null && !user.getImage().equalsIgnoreCase("")){
+            Glide.with(getActivity()).load(user.getImage()).into(profile_image);
+        }
 
         name.setText(user.getFirstName() + " " + user.getLastName());
         email.setText(user.getEmail());
         phone.setText(user.getPhNo());
         edit.setOnClickListener(this);
-
-
+        order.setOnClickListener(this);
+        notificaiton.setOnClickListener(this);
+        logout.setOnClickListener(this);
         return  v;
     }
 
     @Override
     public void onClick(View view) {
-
         int id = view.getId();
-
-        switch (id)
-        {
+        switch (id) {
             case R.id.edit:{
                 Intent it= new Intent( getActivity(), EditUserProfile.class);
                 startActivity(it);
                 break;
             }
+            case R.id.order:{
+                Log.e("Profile", "Order");
+                break;
+            }
+            case R.id.notification:{
+                Log.e("Profile", "Notifications");
+                break;
+            }
+            case R.id.logout:{
+                Log.e("Profile", "Logout");
+                FirebaseAuth auth = FirebaseAuth.getInstance();
+                auth.signOut();
+                session.destroySession();
+                Intent it= new Intent( getActivity(), LoginActivity.class);
+                it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(it);
+                getActivity().finish();
+                break;
+            }
         }
-
-
-
     }
 }

@@ -7,8 +7,16 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.shreyaspatil.MaterialDialog.MaterialDialog;
+import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,6 +28,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import java.io.File;
+import java.util.Calendar;
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
@@ -30,7 +41,7 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
     };
-    private String strFirstName , strLastName , strEmail , strPhone = "";
+    private String strFirstName, strLastName, strEmail, strPhone = "";
 
     private User user;
     private Session session;
@@ -40,16 +51,16 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
     private Button editSubmitBtn;
     private DatabaseReference databaseReference;
     private boolean isImage;
-    private String imagePath;
+    private Uri imagePath;
+    private ProgressBar registrationProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_user_profile);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         isImage = false;
-        imagePath = "";
+//        imagePath = ;
         FloatingActionButton fab = findViewById(R.id.galleryBtn);
         fab.setOnClickListener(this);
 
@@ -57,12 +68,16 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         session = new Session(EditUserProfile.this);
         user = session.getUser();
 
+        toolbar.setTitle(user.getFirstName());
+        setSupportActionBar(toolbar);
         imageView =  findViewById(R.id.userImage);
         firstName = findViewById(R.id.editFirstName);
         lastName = findViewById(R.id.editLastName);
         phone = findViewById(R.id.editphone);
         email = findViewById(R.id.editEmail);
         editSubmitBtn = findViewById(R.id.editSubmitBtn);
+        registrationProgress= findViewById(R.id.registrationProgress);
+
 
         firstName.setText(user.getFirstName());
         lastName.setText(user.getLastName());
@@ -76,72 +91,6 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         }
 
         editSubmitBtn.setOnClickListener(this);
-        editSubmitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                      strFirstName = firstName.getText().toString();
-//                        strLastName = lastName.getText().toString();
-//                        strEmail = email.getText().toString();
-//                        strPhone = phone.getText().toString();
-//
-//                        //check internet
-////                        isConn = helpers.isConnected(EditUserProfile.this);
-////                        if (!isConn)
-////                        {
-////                            helpers.showError(EditUserProfile.this , "Internet Connection Error" ,"Not Connected To Internet! Check Your Connection And Try Again" );
-////                            return;
-////                        }
-//
-//
-//                        boolean flag = isValid();
-//                        if (flag) {
-//
-//                            editedUser.setFirstName(strFirstName);
-//                            editedUser.setLastName(strLastName);
-//                            editedUser.setEmail(strEmail);
-//                            editedUser.setPhNo(strPhone);
-//                            String Id= strEmail.replace("@" , "-");
-//                            Id = Id.replace("." , "_");
-//                            editedUser.setId(Id);
-//                            editedUser.setQualification("");
-//                            editedUser.setRole(1);
-//
-//                            if(imageStatus){
-//                                saveImage(imageView);
-//                            }
-//                            //firebase
-//
-////                    registrationProgress.setVisibility(View.VISIBLE);
-//                            editSubmitBtn.setVisibility(View.GONE);
-//
-//                            DatabaseReference reference = FirebaseDatabase.getInstance().getReference();
-//
-//                            reference.child("Users").child(Id).setValue(editedUser).addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                @Override
-//                                public void onSuccess(Void aVoid) {
-//                                    Log.e("firebase" , "in OnSuccess");
-//                                    session.setSession(editedUser);
-//                                    Intent intent = new Intent(EditUserProfile.this , Dashboard.class);
-//                                    startActivity(intent);
-//                                    finish();
-//                                }
-//                            })
-//                                    .addOnFailureListener(new OnFailureListener() {
-//                                        @Override
-//                                        public void onFailure(@NonNull Exception e) {
-//                                            Log.e("firebase" , "in OnFailure");
-////                                    registrationProgress.setVisibility(View.GONE);
-//                                            editSubmitBtn.setVisibility(View.VISIBLE);
-//                                            helpers.showError(EditUserProfile.this , "Profile Updation  Failed!" , e.getMessage());
-//                                        }
-//                                    });
-//
-//
-//                        }
-//                    //go to next activity
-            }
-        });
-
     }
 
     private boolean isValid()
@@ -182,6 +131,32 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         int id = v.getId();
         switch (id){
             case R.id.editSubmitBtn:{
+                Log.e("Profile", "Button Clicked");
+                //check internet
+                boolean isConn = helpers.isConnected(EditUserProfile.this);
+                if (!isConn)
+                {
+                    helpers.showError(EditUserProfile.this , "Internet Connection Error" ,"Not Connected To Internet! Check Your Connection And Try Again" );
+                    return;
+                }
+                Log.e("Profile", "Internent Connected");
+                strFirstName = firstName.getText().toString();
+                strLastName = lastName.getText().toString();
+                strEmail = email.getText().toString();
+                strPhone = phone.getText().toString();
+                boolean flag = isValid();
+                Log.e("Profile", "Validation Done");
+                if(flag){
+                    Log.e("Profile", "Validation Successful");
+                    if(isImage){
+                        Log.e("Profile", "Image Found");
+                        uploadImage();
+                    }
+                    else{
+                        Log.e("Profile", "No Image Found");
+                        saveToDatabase();
+                    }
+                }
                 break;
             }
             case R.id.galleryBtn:{
@@ -196,6 +171,110 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
             }
         }
     }
+    private void uploadImage(){
+        registrationProgress.setVisibility(View.VISIBLE);
+        editSubmitBtn.setVisibility(View.GONE);
+        final StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Users").child(user.getId());
+//        Uri selectedMediaUri = Uri.parse(imagePath);
+
+//        File file = new File(selectedMediaUri.getPath());
+
+//        Log.e("Profile", "Uri: " + selectedMediaUri.getPath() + " File: " + file.exists());
+//        if(!file.exists()){
+//            registrationProgress.setVisibility(View.GONE);
+//            editSubmitBtn.setVisibility(View.VISIBLE);
+//            helpers.showError(EditUserProfile.this, "ERROR!", "Something went wrong.\n Please try again later.");
+//            return;
+//        }
+        Calendar calendar = Calendar.getInstance();
+
+        storageReference.child(calendar.getTimeInMillis()+"").putFile(imagePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        user.setImage(uri.toString());
+                        saveToDatabase();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Profile", "Downlaod Url: " + e.getMessage());
+                        registrationProgress.setVisibility(View.GONE);
+                        editSubmitBtn.setVisibility(View.VISIBLE);
+                        helpers.showError(EditUserProfile.this, "ERROR!", "Something went wrong.\n Please try again later.");
+                    }
+                });
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("Profile", "Upload Image Url: " + e.getMessage());
+                registrationProgress.setVisibility(View.GONE);
+                editSubmitBtn.setVisibility(View.VISIBLE);
+                helpers.showError(EditUserProfile.this, "ERROR!", "Something went wrong.\n Please try again later.");            }
+        });
+    }
+
+    private void saveToDatabase(){
+        registrationProgress.setVisibility(View.VISIBLE);
+        editSubmitBtn.setVisibility(View.GONE);
+        user.setEmail(strEmail);
+        user.setFirstName(strFirstName);
+        user.setLastName(strLastName);
+        user.setPhNo(strPhone);
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getId());
+        databaseReference.setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                profileSuccessDialog();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                registrationProgress.setVisibility(View.GONE);
+                editSubmitBtn.setVisibility(View.VISIBLE);
+                helpers.showError(EditUserProfile.this, "ERROR!", "Something went wrong.\n Please try again later.");
+            }
+        });
+    }
+
+    private void profileSuccessDialog(){
+        registrationProgress.setVisibility(View.GONE);
+        editSubmitBtn.setVisibility(View.VISIBLE);
+        session.setSession(user);
+
+        MaterialDialog mDialog = new MaterialDialog.Builder(EditUserProfile.this)
+                .setTitle("PROFILE UPDATED")
+                .setMessage("Your Profile has been updated successfully.")
+                .setCancelable(false)
+                .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                        Intent intent = new Intent(EditUserProfile.this, Dashboard.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                        // Delete Operation
+                    }
+                })
+                .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                        Intent intent = new Intent(EditUserProfile.this, Dashboard.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .build();
+
+        // Show Dialog
+        mDialog.show();
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -206,7 +285,7 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
                     Uri image = data.getData();
                     if(image != null){
                         Glide.with(getApplicationContext()).load(image).into(imageView);
-                        imagePath = image.toString();
+                        imagePath = image;
                         isImage = true;
                     }
                 }

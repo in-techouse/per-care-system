@@ -25,4 +25,7 @@
     <string name="action_login">Login</string>
     <string name="action_forgot_password">Forgot Password?</string>
     <string name="already_have_an_account_click_here_to_login">Already have an account? Click here to <b>LOGIN</b></string>
+    <string name="edit_profile">EDIT PROFILE</string>
+    <string name="title_orders">Orders</string>
+    <string name="action_logout">LOGOUT</string>
 </resources>

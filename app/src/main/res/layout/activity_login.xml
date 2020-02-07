@@ -88,7 +88,6 @@
             android:textAlignment="center"
             android:textColor="@color/colorPrimary"
             android:id="@+id/go_To_Signup"
-            android:layout_margin="22dp"
             android:padding="12dp"
             android:text="@string/don_t_have_a_account_click_here_to_register"
             android:layout_width="match_parent"
@@ -99,7 +98,6 @@
             android:textColor="@color/colorPrimary"
             android:text="@string/sign_up_as_a_veterinary_doctor"
             android:padding="12dp"
-            android:layout_margin="22dp"
             android:id="@+id/go_To_doctor_reg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
