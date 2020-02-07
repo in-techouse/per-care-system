@@ -37,8 +37,6 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
     private DoctorFragment  doctor;
     private FoodFragment food;
     private ProfileFragment profileFragment;
-    private OrderFragment orderFragment;
-    private NotificationsFragment notificationsFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +47,7 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
         doctor = new DoctorFragment();
         food = new FoodFragment();
         profileFragment = new ProfileFragment();
-        orderFragment = new OrderFragment();
-        notificationsFragment = new NotificationsFragment();
+
 
 
 
@@ -80,12 +77,6 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
                         navView.getMenu().findItem(R.id.navigation_clinic).setChecked(true);
                         break;
                     case 3:
-                        navView.getMenu().findItem(R.id.navigation_order).setChecked(true);
-                        break;
-                    case 4:
-                        navView.getMenu().findItem(R.id.navigation_notification).setChecked(true);
-                        break;
-                    case 5:
                         navView.getMenu().findItem(R.id.navigation_profile).setChecked(true);
                         break;
                 }
@@ -141,23 +132,16 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
                     return clinic;
                 }
                 case 3:
-                {
-                    return orderFragment;
-                }
-                case 4:
-                {
-                    return notificationsFragment;
-                }
-                case 5:{
+                 {
                     return profileFragment;
-                }
+                 }
             }
             return null;
         }
 
         @Override
         public int getCount() {
-            return 5;
+            return 4;
         }
 
         @Override
@@ -181,14 +165,8 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
             case R.id.navigation_clinic:
                 pager.setCurrentItem(2);
                 break;
-            case R.id.navigation_order:
-                pager.setCurrentItem(3);
-                break;
-            case R.id.navigation_notification:
-                pager.setCurrentItem(4);
-                break;
             case R.id.navigation_profile:
-                pager.setCurrentItem(5);
+                pager.setCurrentItem(3);
                 break;
         }
 

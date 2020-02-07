@@ -15,17 +15,10 @@
         android:icon="@drawable/clinic"
         android:title="Clinics"/>
 
-    <item
-        android:id="@+id/navigation_order"
-        android:icon="@drawable/order"
-        android:title="Orders"/>
 
     <item
-        android:id="@+id/navigation_notification"
-        android:icon="@drawable/notification"
-        android:title="Notifications"/>
+            android:id="@+id/navigation_profile"
+            android:icon="@drawable/profile_icon"
+            android:title="@string/title_profile" />
 
-<!--    <item-->
-<!--        android:id="@+id/navigation_profile"-->
-<!--        android:title="@string/title_profile" />-->
 </menu>
