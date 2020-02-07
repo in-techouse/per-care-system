@@ -191,11 +191,15 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         storageReference.child(calendar.getTimeInMillis()+"").putFile(imagePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                taskSnapshot.getMetadata().getReference().getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
+                        Log.e("Profile" , "in OnSuccess "+uri.toString());
                         user.setImage(uri.toString());
+                        registrationProgress.setVisibility(View.GONE);
+                        editSubmitBtn.setVisibility(View.VISIBLE);
                         saveToDatabase();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -204,8 +208,24 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
                         registrationProgress.setVisibility(View.GONE);
                         editSubmitBtn.setVisibility(View.VISIBLE);
                         helpers.showError(EditUserProfile.this, "ERROR!", "Something went wrong.\n Please try again later.");
+//
                     }
                 });
+//                storageReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                    @Override
+//                    public void onSuccess(Uri uri) {
+//                        user.setImage(uri.toString());
+//                        saveToDatabase();
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.e("Profile", "Downlaod Url: " + e.getMessage());
+//                        registrationProgress.setVisibility(View.GONE);
+//                        editSubmitBtn.setVisibility(View.VISIBLE);
+//                        helpers.showError(EditUserProfile.this, "ERROR!", "Something went wrong.\n Please try again later.");
+//                    }
+//                });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
