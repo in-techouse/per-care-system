@@ -4,11 +4,14 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -22,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lcwu.fyp.petcaresystem.R;
+import lcwu.fyp.petcaresystem.adapters.FoodAdapter;
 import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.Doctor;
@@ -43,14 +47,7 @@ public class FoodFragment extends Fragment {
     private Helpers helpers;
     private List<Food> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Foods");
-
-    public static FoodFragment newInstance() {
-        FoodFragment myFragment = new FoodFragment();
-        return myFragment;
-    }
-
-
-
+    private FoodAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,10 +59,14 @@ public class FoodFragment extends Fragment {
         loading = v.findViewById(R.id.Loading);
         noFood = v.findViewById(R.id.noFood);
         food = v.findViewById(R.id.food);
+        adapter= new FoodAdapter();
+        food.setLayoutManager(new LinearLayoutManager(getActivity()));
+        food.setAdapter(adapter);
         session = new Session(getActivity());
         user = session.getUser();
         helpers = new Helpers();
         data = new ArrayList<>();
+        Log.e("Food", "Food Fragment Started");
         loadFoods();
 
 
@@ -80,16 +81,20 @@ public class FoodFragment extends Fragment {
         loading.setVisibility(View.VISIBLE);
         noFood.setVisibility(View.GONE);
         food.setVisibility(View.GONE);
-        reference.orderByChild("userId").equalTo(user.getId()).addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e("Food", "Food DataSnapshot: " + dataSnapshot.toString());
                 for(DataSnapshot d: dataSnapshot.getChildren()){
+                    Log.e("Food", "Food Loop Data: " + d.toString());
                     Food f = d.getValue(Food.class);
                     if (f != null)  {
+                        Log.e("Food", "If Food: " + f.getName());
                         data.add(f);
                     }
                 }
                 if (data.size()>0){
+                    adapter.setData(data);
                     food.setVisibility(View.VISIBLE);
                     noFood.setVisibility(View.GONE);
                 }
@@ -105,13 +110,8 @@ public class FoodFragment extends Fragment {
                 loading.setVisibility(View.GONE);
                 noFood.setVisibility(View.VISIBLE);
                 food.setVisibility(View.GONE);
-
             }
-
-
         });
-
-
     }
 }
 

@@ -6,7 +6,6 @@
     tools:context=".fragments.FoodFragment"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:orientation="vertical"
         android:id="@+id/Loading"

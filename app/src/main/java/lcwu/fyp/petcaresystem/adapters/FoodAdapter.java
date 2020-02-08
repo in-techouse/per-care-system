@@ -3,6 +3,7 @@ package lcwu.fyp.petcaresystem.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -31,13 +32,17 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
     @NonNull
     @Override
     public FoodAdapter.FoodHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_food,parent,false);
         return new FoodAdapter.FoodHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull FoodAdapter.FoodHolder holder, int position) {
         final Food f = data.get(position);
+        holder.name.setText(f.getName());
+        holder.price.setText(f.getPrice());
+        holder.quantity.setText(f.getQuantity());
+        holder.type.setText(f.getType());
     }
 
     @Override
@@ -46,8 +51,13 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
     }
 
     class FoodHolder extends RecyclerView.ViewHolder {
+        TextView name,price,quantity,type;
         public FoodHolder(@NonNull View itemView) {
             super(itemView);
+            name = itemView.findViewById(R.id.name);
+            price = itemView.findViewById(R.id.price);
+            quantity= itemView.findViewById(R.id.quantity);
+            type = itemView.findViewById(R.id.type);
         }
     }
 }
