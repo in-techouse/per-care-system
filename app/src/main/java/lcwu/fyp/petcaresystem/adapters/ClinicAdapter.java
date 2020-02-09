@@ -5,6 +5,7 @@ import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ListAdapter;
@@ -38,6 +39,13 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicHold
     public void onBindViewHolder(@NonNull ClinicHolder holder, int position) {
     final Clinic c = data.get(position);
 
+        holder.name.setText(c.getName());
+        holder.number.setText(c.getNumber());
+        holder.address.setText(c.getAddress());
+        holder.startTiming.setText(c.getStartTiming());
+        holder.endTiming.setText(c.getEndTiming());
+        holder.fee.setText(c.getFee());
+
     }
 
     @Override
@@ -46,9 +54,17 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicHold
     }
 
     class ClinicHolder extends RecyclerView.ViewHolder {
-
+        TextView name,number,address,startTiming,endTiming,fee;
         public ClinicHolder(@NonNull View itemView) {
             super(itemView);
+            name = itemView.findViewById(R.id.name);
+            number = itemView.findViewById(R.id.number);
+            address = itemView.findViewById(R.id.address);
+            startTiming= itemView.findViewById(R.id.startTiming);
+            endTiming = itemView.findViewById(R.id.endTiming);
+            fee = itemView.findViewById(R.id.fee);
+
+
         }
     }
 }

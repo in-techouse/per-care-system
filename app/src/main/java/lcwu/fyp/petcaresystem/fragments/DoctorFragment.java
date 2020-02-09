@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -23,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lcwu.fyp.petcaresystem.R;
+import lcwu.fyp.petcaresystem.adapters.ClinicAdapter;
+import lcwu.fyp.petcaresystem.adapters.DoctorAdapter;
 import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.Doctor;
@@ -42,8 +45,8 @@ public class DoctorFragment extends Fragment {
     private User user;
     private Helpers helpers;
     private List<Doctor> data;
-    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Doctors");
-
+    private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
+    private DoctorAdapter adapter;
     public static DoctorFragment newInstance() {
         DoctorFragment myFragment = new DoctorFragment();
 
@@ -61,6 +64,9 @@ public class DoctorFragment extends Fragment {
         loading = v.findViewById(R.id.Loading);
         noDoctor = v.findViewById(R.id.noDoctor);
         doctors = v.findViewById(R.id.doctors);
+        adapter= new DoctorAdapter();
+        doctors.setLayoutManager(new LinearLayoutManager(getActivity()));
+        doctors.setAdapter(adapter);
         session = new Session(getActivity());
         user = session.getUser();
         helpers = new Helpers();
@@ -79,7 +85,7 @@ public class DoctorFragment extends Fragment {
         loading.setVisibility(View.VISIBLE);
         noDoctor.setVisibility(View.GONE);
         doctors.setVisibility(View.GONE);
-        reference.orderByChild("userId").equalTo(user.getId()).addValueEventListener(new ValueEventListener() {
+        reference.orderByChild("role").equalTo(1).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot d: dataSnapshot.getChildren()){
@@ -89,6 +95,7 @@ public class DoctorFragment extends Fragment {
                     }
                 }
                 if (data.size()>0){
+                    adapter.setData(data);
                     doctors.setVisibility(View.VISIBLE);
                     noDoctor.setVisibility(View.GONE);
                 }

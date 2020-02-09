@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -24,6 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lcwu.fyp.petcaresystem.R;
+import lcwu.fyp.petcaresystem.adapters.ClinicAdapter;
 import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.Clinic;
@@ -45,7 +47,7 @@ public class ClinicFragment extends Fragment {
     private Helpers helpers;
     private List<Clinic> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Clinics");
-
+    private ClinicAdapter adapter;
     public static ClinicFragment newInstance() {
         ClinicFragment myFragment = new ClinicFragment();
 
@@ -65,10 +67,15 @@ public class ClinicFragment extends Fragment {
         loading = v.findViewById(R.id.Loading);
         noClinic = v.findViewById(R.id.noClinic);
         clinics = v.findViewById(R.id.clinics);
+        adapter = new ClinicAdapter();
+        clinics.setLayoutManager(new LinearLayoutManager(getActivity()));
+        clinics.setAdapter(adapter);
         session = new Session(getActivity());
         user = session.getUser();
         helpers = new Helpers();
         data = new ArrayList<>();
+
+
         loadClinics();
 
 
@@ -83,7 +90,7 @@ public class ClinicFragment extends Fragment {
         loading.setVisibility(View.VISIBLE);
         noClinic.setVisibility(View.GONE);
         clinics.setVisibility(View.GONE);
-        reference.orderByChild("userId").equalTo(user.getId()).addValueEventListener(new ValueEventListener() {
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot d: dataSnapshot.getChildren()){
@@ -93,6 +100,7 @@ public class ClinicFragment extends Fragment {
                     }
                 }
                 if (data.size()>0){
+                    adapter.setData(data);
                     clinics.setVisibility(View.VISIBLE);
                     noClinic.setVisibility(View.GONE);
                 }
@@ -101,9 +109,6 @@ public class ClinicFragment extends Fragment {
                     noClinic.setVisibility(View.VISIBLE);
                 }
                 loading.setVisibility(View.GONE);
-
-
-
             }
 
             @Override
@@ -111,10 +116,7 @@ public class ClinicFragment extends Fragment {
                 loading.setVisibility(View.GONE);
                 noClinic.setVisibility(View.VISIBLE);
                 clinics.setVisibility(View.GONE);
-
             }
-
-
         });
     }
   }

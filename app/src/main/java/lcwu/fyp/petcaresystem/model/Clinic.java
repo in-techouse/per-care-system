@@ -3,18 +3,9 @@ package lcwu.fyp.petcaresystem.model;
 import java.io.Serializable;
 
 public class Clinic implements Serializable {
-   private String id , name , address , timings , phNo ;
+   private String id , name , address , endTiming , fee, number, startTiming;
 
-    public Clinic() {
-    }
-
-    public Clinic(String id, String name, String address, String timings, String phNo) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.timings = timings;
-        this.phNo = phNo;
-    }
+    public Clinic() { }
 
     public String getId() {
         return id;
@@ -40,19 +31,35 @@ public class Clinic implements Serializable {
         this.address = address;
     }
 
-    public String getTimings() {
-        return timings;
+    public String getEndTiming() {
+        return endTiming;
     }
 
-    public void setTimings(String timings) {
-        this.timings = timings;
+    public void setEndTiming(String endTiming) {
+        this.endTiming = endTiming;
     }
 
-    public String getPhNo() {
-        return phNo;
+    public String getFee() {
+        return fee;
     }
 
-    public void setPhNo(String phNo) {
-        this.phNo = phNo;
+    public void setFee(String fee) {
+        this.fee = fee;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
+    public String getStartTiming() {
+        return startTiming;
+    }
+
+    public void setStartTiming(String startTiming) {
+        this.startTiming = startTiming;
     }
 }
