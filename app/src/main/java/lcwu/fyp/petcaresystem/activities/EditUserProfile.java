@@ -175,19 +175,6 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         registrationProgress.setVisibility(View.VISIBLE);
         editSubmitBtn.setVisibility(View.GONE);
         final StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Users").child(user.getId());
-        Uri selectedMediaUri = Uri.parse(imagePath.toString());
-
-        File file = new File(selectedMediaUri.getPath());
-         Log.e("file" , "in file object value "+file.toString());
-        Log.e("Profile", "Uri: " + selectedMediaUri.getPath() + " File: " + file.exists());
-//
-//        if(!file.exists()){
-//            Log.e("Uri" , "file not exists showing error");
-//            registrationProgress.setVisibility(View.GONE);
-//            editSubmitBtn.setVisibility(View.VISIBLE);
-//            helpers.showError(EditUserProfile.this, "ERROR!", "Something went wrong.\n Please try again later.");
-//            return;
-//        }
         Calendar calendar = Calendar.getInstance();
 
         storageReference.child(calendar.getTimeInMillis()+"").putFile(imagePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
