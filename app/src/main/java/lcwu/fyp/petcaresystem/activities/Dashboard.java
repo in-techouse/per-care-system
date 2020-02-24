@@ -1,11 +1,12 @@
 package lcwu.fyp.petcaresystem.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -24,11 +25,11 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
 
     private ViewPager pager;
     private BottomNavigationView navView;
-    private PagerAdapter adapter;
     private ClinicFragment clinic;
-    private DoctorFragment  doctor;
+    private DoctorFragment doctor;
     private FoodFragment food;
     private ProfileFragment profileFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,12 +42,10 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
         profileFragment = new ProfileFragment();
 
 
-
-
         navView.setOnNavigationItemSelectedListener(this);
 
 
-        adapter = new PagerAdapter(getSupportFragmentManager(), 1);
+        PagerAdapter adapter = new PagerAdapter(getSupportFragmentManager(), 1);
         pager.setAdapter(adapter);
 
 
@@ -79,71 +78,7 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
 
             }
         });
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-//                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-//                .build();
-//        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-//        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-//        NavigationUI.setupWithNavController(navView, navController);
     }
-
-    @Override
-    public void onPointerCaptureChanged(boolean hasCapture) {
-
-    }
-
-
-    class PagerAdapter extends FragmentPagerAdapter{
-
-        public PagerAdapter(@NonNull FragmentManager fm, int behavior) {
-            super(fm, behavior);
-        }
-
-            @NonNull
-        @Override
-        public Fragment getItem(int position) {
-            switch (position)
-            {
-                case  0:
-                {
-                    Log.e("Click" , "food Clicked");
-                    return food;
-                }
-                case  1:
-                {
-                    Log.e("click" , "doctor Clicked");
-                    return doctor;
-                }
-
-                case 2:
-                {
-                    Log.e("click" , "clinic click");
-                    return clinic;
-                }
-                case 3:
-                 {
-                    return profileFragment;
-                 }
-            }
-            return null;
-        }
-
-        @Override
-        public int getCount() {
-            return 4;
-        }
-
-        @Override
-        public int getItemPosition(@NonNull Object object) {
-            return POSITION_NONE;
-        }
-    }
-
-
-
 
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
@@ -163,5 +98,64 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
         }
 
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.user_cart,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_cart:{
+                Intent it = new Intent(Dashboard.this, CartActivity.class);
+                startActivity(it);
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    class PagerAdapter extends FragmentPagerAdapter {
+
+        PagerAdapter(@NonNull FragmentManager fm, int behavior) {
+            super(fm, behavior);
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 0: {
+                    Log.e("Click", "food Clicked");
+                    return food;
+                }
+                case 1: {
+                    Log.e("click", "doctor Clicked");
+                    return doctor;
+                }
+
+                case 2: {
+                    Log.e("click", "clinic click");
+                    return clinic;
+                }
+                case 3: {
+                    return profileFragment;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        public int getCount() {
+            return 4;
+        }
+
+        @Override
+        public int getItemPosition(@NonNull Object object) {
+            return POSITION_NONE;
+        }
     }
 }

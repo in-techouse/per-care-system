@@ -28,8 +28,6 @@ import lcwu.fyp.petcaresystem.adapters.ClinicAdapter;
 import lcwu.fyp.petcaresystem.adapters.DoctorAdapter;
 import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
-import lcwu.fyp.petcaresystem.model.Doctor;
-import lcwu.fyp.petcaresystem.model.Order;
 import lcwu.fyp.petcaresystem.model.User;
 
 /**
@@ -44,7 +42,7 @@ public class DoctorFragment extends Fragment {
     private Session session;
     private User user;
     private Helpers helpers;
-    private List<Doctor> data;
+    private List<User> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
     private DoctorAdapter adapter;
     public static DoctorFragment newInstance() {
@@ -85,11 +83,11 @@ public class DoctorFragment extends Fragment {
         loading.setVisibility(View.VISIBLE);
         noDoctor.setVisibility(View.GONE);
         doctors.setVisibility(View.GONE);
-        reference.orderByChild("role").equalTo(1).addValueEventListener(new ValueEventListener() {
+        reference.orderByChild("role").equalTo(2).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot d: dataSnapshot.getChildren()){
-                    Doctor doc = d.getValue(Doctor.class);
+                    User doc = d.getValue(User.class);
                     if (doc != null)  {
                         data.add(doc);
                     }

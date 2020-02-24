@@ -3,24 +3,21 @@ package lcwu.fyp.petcaresystem.model;
 import java.io.Serializable;
 
 public class Clinic implements Serializable {
-   private String id , name , address , endTiming , fee, number, startTiming;
+    private String address, endTiming, id, image, name, number, startTiming;
+    private int fee;
 
-    public Clinic() { }
-
-    public String getId() {
-        return id;
+    public Clinic() {
     }
 
-    public void setId(String id) {
+    public Clinic(String address, String endTiming, String id, String image, String name, String number, String startTiming, int fee) {
+        this.address = address;
+        this.endTiming = endTiming;
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+        this.image = image;
         this.name = name;
+        this.number = number;
+        this.startTiming = startTiming;
+        this.fee = fee;
     }
 
     public String getAddress() {
@@ -39,12 +36,28 @@ public class Clinic implements Serializable {
         this.endTiming = endTiming;
     }
 
-    public String getFee() {
-        return fee;
+    public String getId() {
+        return id;
     }
 
-    public void setFee(String fee) {
-        this.fee = fee;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getNumber() {
@@ -61,5 +74,13 @@ public class Clinic implements Serializable {
 
     public void setStartTiming(String startTiming) {
         this.startTiming = startTiming;
+    }
+
+    public int getFee() {
+        return fee;
+    }
+
+    public void setFee(int fee) {
+        this.fee = fee;
     }
 }

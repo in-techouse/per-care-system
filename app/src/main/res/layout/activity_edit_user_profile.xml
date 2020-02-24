@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:layout_gravity="center"
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:id="@+id/userImage" />
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

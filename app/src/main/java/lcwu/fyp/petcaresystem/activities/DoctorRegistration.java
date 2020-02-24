@@ -1,8 +1,5 @@
 package lcwu.fyp.petcaresystem.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -12,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -25,14 +25,13 @@ import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.User;
 
-public class DoctorRegistration extends AppCompatActivity implements View.OnClickListener{
+public class DoctorRegistration extends AppCompatActivity implements View.OnClickListener {
 
-    Button btnSubmit;
-    TextView go_To_Login;
-    EditText edtFirstName, edtLastName, edtEmail, edtPhone, edtPassword, edtCnfrmPass,qualification;
-    String str1stName, strLastName, strEmail, strPh, strPass, strCnfmPass,strqualification;
-    ProgressBar registrationProgress;
-    Helpers helpers;
+    private Button btnSubmit;
+    private EditText edtFirstName, edtLastName, edtEmail, edtPhone, edtPassword, edtCnfrmPass, qualification;
+    private String str1stName, strLastName, strEmail, strPh, strPass, strCnfmPass, strqualification;
+    private ProgressBar registrationProgress;
+    private Helpers helpers;
 
 
     @Override
@@ -43,28 +42,28 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
 
         helpers = new Helpers();
 
-        btnSubmit=findViewById(R.id.btnSubmit);
-        go_To_Login=findViewById(R.id.go_To_Login);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        TextView go_To_Login = findViewById(R.id.go_To_Login);
 
-        edtFirstName= findViewById(R.id.edtFirstName);
-        edtLastName= findViewById(R.id.edtLastName);
-        edtEmail= findViewById(R.id.edtEmail);
-        edtPhone= findViewById(R.id.edtphone);
-        edtPassword= findViewById(R.id.edtpassword);
-        edtCnfrmPass= findViewById(R.id.edtCnfrmPass);
-        registrationProgress= findViewById(R.id.registrationProgress);
+        edtFirstName = findViewById(R.id.edtFirstName);
+        edtLastName = findViewById(R.id.edtLastName);
+        edtEmail = findViewById(R.id.edtEmail);
+        edtPhone = findViewById(R.id.edtphone);
+        edtPassword = findViewById(R.id.edtpassword);
+        edtCnfrmPass = findViewById(R.id.edtCnfrmPass);
+        registrationProgress = findViewById(R.id.registrationProgress);
         qualification = findViewById(R.id.qualification);
 
         btnSubmit.setOnClickListener(this);
         go_To_Login.setOnClickListener(this);
 
     }
+
     @Override
     public void onClick(View v) {
 
-        int id=v.getId();
-        switch (id)
-        {
+        int id = v.getId();
+        switch (id) {
             case R.id.btnSubmit: {
                 str1stName = edtFirstName.getText().toString();
                 strLastName = edtLastName.getText().toString();
@@ -76,9 +75,8 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
 
                 //check internet
                 boolean isConn = helpers.isConnected(DoctorRegistration.this);
-                if (!isConn)
-                {
-                    helpers.showError(DoctorRegistration.this , "Internet Connection Error" ,"Not Connected To Internet! Check Your Connection And Try Again" );
+                if (!isConn) {
+                    helpers.showError(DoctorRegistration.this, "Internet Connection Error", "Not Connected To Internet! Check Your Connection And Try Again");
                     return;
                 }
 
@@ -107,8 +105,8 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
                                     user.setQualification(strqualification);
                                     user.setRole(2);
 
-                                    String id= strEmail.replace("@" , "-");
-                                    id = id.replace("." , "_");
+                                    String id = strEmail.replace("@", "-");
+                                    id = id.replace(".", "_");
                                     user.setId(id);
 
 
@@ -119,7 +117,8 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
                                             session.setSession(user);
 
                                             //start dashboard activity
-                                            Intent intent = new Intent(DoctorRegistration.this , Dashboard.class);
+                                            Intent intent = new Intent(DoctorRegistration.this, DoctorRegistration.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                             startActivity(intent);
                                             finish();
 
@@ -130,7 +129,8 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
 
                                             registrationProgress.setVisibility(View.GONE);
                                             btnSubmit.setVisibility(View.VISIBLE);
-                                            helpers.showError(DoctorRegistration.this , "Registration Failed!" , e.getMessage());
+                                            helpers.showError(DoctorRegistration.this, "REGISTRATION FAILED!", "Something went wrong.\n Please try again later");
+
                                         }
 
                                     });
@@ -140,7 +140,8 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
                         public void onFailure(@NonNull Exception e) {
                             registrationProgress.setVisibility(View.GONE);
                             btnSubmit.setVisibility(View.VISIBLE);
-                            helpers.showError(DoctorRegistration.this , "Registration Failed!" , e.getMessage());
+                            helpers.showError(DoctorRegistration.this, "REGISTRATION FAILED!", e.getMessage());
+
 
                         }
                     });
@@ -150,8 +151,7 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
             }
             //go to next activity
 
-            case R.id.go_To_Login:
-            {
+            case R.id.go_To_Login: {
                 finish();
                 break;
             }
@@ -160,72 +160,66 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
     }
 
 
-    private boolean isValid()
-    {
-        boolean flag= true;
-        if (str1stName.length()<3) {
+    private boolean isValid() {
+        boolean flag = true;
+        if (str1stName.length() < 3) {
             edtFirstName.setError("Enter a valid Name");
-            flag= false;
-        }
-        else {
+            flag = false;
+        } else {
             edtFirstName.setError(null);
         }
 
 
-
-        if (strLastName.length()<3) {
+        if (strLastName.length() < 3) {
             edtLastName.setError("Enter a valid Name");
-            flag= false;
-        }
-        else {
+            flag = false;
+        } else {
             edtLastName.setError(null);
         }
 
 
-        if (strEmail.length()<6 || !Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()) {
+        if (strEmail.length() < 6 || !Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()) {
             edtEmail.setError("Enter a valid Email");
-            flag= false;
-        }
-        else {
+            flag = false;
+        } else {
             edtEmail.setError(null);
         }
 
-        if (strqualification.length()<3) {
+        if (strqualification.length() < 3) {
             qualification.setError("Enter a valid Email");
-            flag= false;
-        }
-        else {
+            flag = false;
+        } else {
             qualification.setError(null);
         }
 
 
         if (strPh.length() != 11) {
             edtPhone.setError("Enter a valid Mobile Number");
-            flag= false;
-        }
-        else {
+            flag = false;
+        } else {
             edtPhone.setError(null);
         }
 
 
-        if (strPass.length()<6)
-        {
+        if (strPass.length() < 6) {
             edtPassword.setError("Enter a valid Password");
-            flag= false;
-        }
-        else
-        {
+            flag = false;
+        } else {
             edtPassword.setError(null);
         }
 
 
-        if (strCnfmPass.length()<6)
-        {
+        if (strCnfmPass.length() < 6) {
             edtCnfrmPass.setError("Password does not Match");
-            flag= false;
+            flag = false;
+        } else {
+            edtCnfrmPass.setError(null);
         }
-        else
-        {
+
+        if (strCnfmPass.length() > 5 && strPass.length() > 5 && !strPass.equals(strCnfmPass)) {
+            edtCnfrmPass.setError("Password doesn't match");
+            flag = false;
+        } else {
             edtCnfrmPass.setError(null);
         }
         return flag;
@@ -247,8 +241,6 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
         }
         return true;
     }
-
-
 }
 
 

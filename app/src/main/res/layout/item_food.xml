@@ -1,105 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="11dp"
+    android:layout_margin="11dp"
     app:cardCornerRadius="7dp"
-    android:layout_margin="11dp">
+    app:cardElevation="11dp"
+    android:id="@+id/mainCard">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:scaleType="fitXY"
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"/>
 
 
-     <LinearLayout
-         android:layout_width="match_parent"
-         android:layout_height="wrap_content"
-         android:orientation="vertical"
-         android:padding="11dp">
+        <TextView
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:layout_marginTop="13dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:textAlignment="textStart"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:text="name"
+            android:textSize="19dp"
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-          <RelativeLayout
-              android:layout_marginTop="3dp"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-                <TextView
-                    android:textSize="17dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Name"
-                    android:textStyle="bold"
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true" />
-                 <TextView
-                     android:layout_width="wrap_content"
-                     android:layout_height="wrap_content"
-                     android:layout_alignParentEnd="true"
-                     android:layout_centerVertical="true"
-                     android:id="@+id/name"/>
-          </RelativeLayout>
+        <View
+            android:id="@+id/spacer"
+            android:layout_below="@id/image"
+            android:layout_marginBottom="3dp"
+            android:background="@color/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
 
-         <RelativeLayout
-             android:layout_marginTop="3dp"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content">
-             <TextView
-                 android:textSize="17dp"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="Price"
-                 android:textStyle="bold"
-                 android:layout_alignParentStart="true"
-                 android:layout_centerVertical="true" />
-             <TextView
-                 android:textSize="17dp"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentEnd="true"
-                 android:layout_centerVertical="true"
-                 android:id="@+id/price"/>
-         </RelativeLayout>
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/spacer"
+            android:textColor="@color/colorPrimary"
+            android:paddingStart="7dp"
+            android:paddingEnd="7dp"
+            android:paddingTop="3dp"
+            android:paddingBottom="11dp"
+            android:layout_gravity="end"
+            android:textAlignment="textEnd"
+            android:text="Add To Cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
-         <RelativeLayout
-             android:layout_marginTop="3dp"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content">
-             <TextView
-                 android:textSize="17dp"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="Quantity"
-                 android:textStyle="bold"
-                 android:layout_alignParentStart="true"
-                 android:layout_centerVertical="true" />
-             <TextView
-                 android:textSize="17dp"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentEnd="true"
-                 android:layout_centerVertical="true"
-                 android:id="@+id/quantity"/>
-         </RelativeLayout>
-
-         <RelativeLayout
-             android:layout_marginTop="3dp"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content">
-             <TextView
-                 android:textSize="17dp"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:text="type"
-                 android:textStyle="bold"
-                 android:layout_alignParentStart="true"
-                 android:layout_centerVertical="true" />
-             <TextView
-                 android:textSize="17dp"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentEnd="true"
-                 android:layout_centerVertical="true"
-                 android:id="@+id/type"/>
-         </RelativeLayout>
+        <TextView
+            android:layout_above="@id/spacer"
+            android:layout_alignParentEnd="true"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="13dp"
+            android:background="@color/colorPrimary"
+            android:textColor="@color/colorWhite"
+            android:layout_marginBottom="13dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:text="type"
+            android:textSize="19dp"
+            android:id="@+id/type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
 
 
+<!--        <RelativeLayout-->
+<!--            android:layout_marginStart="7dp"-->
+<!--            android:layout_marginEnd="7dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content">-->
 
-     </LinearLayout>
+<!--            <TextView-->
+<!--                android:id="@+id/type"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:text="type"-->
+<!--                android:textSize="17dp"/>-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/quantity"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:text="quantity"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textSize="17dp" />-->
+<!--        </RelativeLayout>-->
+
+<!--        <RelativeLayout-->
+<!--            android:layout_marginStart="7dp"-->
+<!--            android:layout_marginEnd="7dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="3dp">-->
+
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:text="Price"-->
+<!--                android:textSize="17dp"-->
+<!--                android:textStyle="bold" />-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/price"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_centerVertical="true"-->
+<!--                android:textSize="17dp" />-->
+<!--        </RelativeLayout>-->
+
+
+
+
+    </RelativeLayout>
 
 
 </androidx.cardview.widget.CardView>

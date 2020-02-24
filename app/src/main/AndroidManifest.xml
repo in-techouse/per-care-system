@@ -18,30 +18,66 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateHidden"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".activities.Appointments"></activity>
-        <activity android:name=".activities.Orders" />
-        <activity android:name=".activities.Notifications" />
+        <activity
+            android:name=".activities.CartActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".activities.Dashboard"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.FoodDetailActivity"
+            android:label="@string/app_name"
+            android:parentActivityName=".activities.Dashboard"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.DoctorDashboard"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.Appointments"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.Orders"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.Notifications"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.DoctorRegistration"
-            android:parentActivityName=".activities.LoginActivity" />
+            android:label="@string/app_name"
+            android:parentActivityName=".activities.LoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.Dashboard"
-            android:label="@string/title_activity_dashboard"
-            android:launchMode="singleInstance" />
+            android:label="@string/app_name"
+            android:launchMode="singleInstance"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.FPasswordActivity"
-            android:parentActivityName=".activities.LoginActivity" />
-        <activity android:name=".activities.LoginActivity" />
+            android:label="@string/app_name"
+            android:parentActivityName=".activities.LoginActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activities.LoginActivity"
+            android:label="@string/app_name"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.RegistrationActivity"
-            android:parentActivityName=".activities.LoginActivity" />
+            android:label="@string/app_name"
+            android:parentActivityName=".activities.LoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".activities.EditUserProfile"
-            android:label="@string/title_activity_edit_user_profile"
+            android:label="@string/app_name"
             android:parentActivityName=".activities.Dashboard"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.SplashActivity"
+            android:label="@string/app_name"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -3,54 +3,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.FoodFragment"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".fragments.FoodFragment">
 
     <LinearLayout
-        android:orientation="vertical"
         android:id="@+id/Loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
+        android:orientation="vertical"
         android:padding="12dp">
 
-    <ProgressBar
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/progress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        <ProgressBar
+            android:id="@+id/progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Loading Food"
             android:layout_margin="7dp"
             android:padding="7dp"
-            android:textAlignment="center"/>
+            android:text="Loading Food"
+            android:textAlignment="center" />
 
     </LinearLayout>
 
 
     <TextView
+        android:id="@+id/noFood"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Food Found"
+        android:layout_alignParentTop="true"
         android:layout_margin="7dp"
         android:padding="7dp"
+        android:text="No Food Found"
         android:textAlignment="center"
-        android:id="@+id/noFood"
-        android:layout_alignParentTop="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/food"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/food"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:visibility="gone" />
 
 </RelativeLayout>

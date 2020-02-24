@@ -2,18 +2,16 @@ package lcwu.fyp.petcaresystem.fragments;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,14 +27,12 @@ import lcwu.fyp.petcaresystem.adapters.ClinicAdapter;
 import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.Clinic;
-import lcwu.fyp.petcaresystem.model.Doctor;
 import lcwu.fyp.petcaresystem.model.User;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ClinicFragment extends Fragment {
-
 
 
     private LinearLayout loading;
@@ -48,6 +44,7 @@ public class ClinicFragment extends Fragment {
     private List<Clinic> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Clinics");
     private ClinicAdapter adapter;
+
     public static ClinicFragment newInstance() {
         ClinicFragment myFragment = new ClinicFragment();
 
@@ -55,13 +52,11 @@ public class ClinicFragment extends Fragment {
     }
 
 
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v =inflater.inflate(R.layout.fragment_clinic, container, false);
+        View v = inflater.inflate(R.layout.fragment_clinic, container, false);
 
 
         loading = v.findViewById(R.id.Loading);
@@ -81,6 +76,7 @@ public class ClinicFragment extends Fragment {
 
         return v;
     }
+
     private void loadClinics() {
         if (!helpers.isConnected(getActivity())) {
             helpers.showError(getActivity(), "Internet Error", "No Internet Connection!");
@@ -93,18 +89,17 @@ public class ClinicFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot d: dataSnapshot.getChildren()){
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
                     Clinic c = d.getValue(Clinic.class);
                     if (c != null) {
                         data.add(c);
                     }
                 }
-                if (data.size()>0){
+                if (data.size() > 0) {
                     adapter.setData(data);
                     clinics.setVisibility(View.VISIBLE);
                     noClinic.setVisibility(View.GONE);
-                }
-                else{
+                } else {
                     clinics.setVisibility(View.GONE);
                     noClinic.setVisibility(View.VISIBLE);
                 }
@@ -119,4 +114,4 @@ public class ClinicFragment extends Fragment {
             }
         });
     }
-  }
+}

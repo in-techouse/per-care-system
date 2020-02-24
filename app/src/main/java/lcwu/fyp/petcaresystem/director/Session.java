@@ -6,49 +6,71 @@ import android.preference.PreferenceManager;
 
 import com.google.gson.Gson;
 
+import lcwu.fyp.petcaresystem.model.Cart;
 import lcwu.fyp.petcaresystem.model.User;
 
 public class Session {
-    private Context context;
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Gson gson;
 
-    public Session(Context c){
-        context = c;
-        preferences = PreferenceManager.getDefaultSharedPreferences(context);
+    public Session(Context c) {
+        preferences = PreferenceManager.getDefaultSharedPreferences(c);
         editor = preferences.edit();
         gson = new Gson();
     }
 
-    public void setSession(User user){
+    public void destroySession() {
+        editor.remove("user");
+        editor.remove("cart");
+        editor.commit();
+    }
+
+    public void setSession(User user) {
         String value = gson.toJson(user);
         editor.putString("user", value);
         editor.commit();
     }
 
-    public void destroySession(){
-        editor.remove("user");
+    public void setCart(Cart cart) {
+        String value = gson.toJson(cart);
+        editor.putString("cart", value);
         editor.commit();
     }
 
-    public User getUser(){
+
+    public User getUser() {
         User user = new User();
-        try{
+        try {
 
             String value = preferences.getString("user", "*");
 
-            if(value == null || value.equals("*")){
+            if (value == null || value.equals("*")) {
                 user = null;
-            }
-            else{
+            } else {
                 user = gson.fromJson(value, User.class);
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             user = null;
         }
         return user;
+    }
+
+    public Cart getCart() {
+        Cart cart;
+        try {
+
+            String value = preferences.getString("cart", "*");
+
+            if (value == null || value.equals("*")) {
+                cart = null;
+            } else {
+                cart = gson.fromJson(value, Cart.class);
+            }
+        } catch (Exception e) {
+            cart = null;
+        }
+        return cart;
     }
 
 }

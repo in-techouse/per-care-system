@@ -1,6 +1,5 @@
 package lcwu.fyp.petcaresystem.adapters;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +11,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lcwu.fyp.petcaresystem.R;
-import lcwu.fyp.petcaresystem.model.Doctor;
+import lcwu.fyp.petcaresystem.model.User;
 
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DocHolder> {
-    private List<Doctor> data;
+    private List<User> data;
 
-    public DoctorAdapter(){
+    public DoctorAdapter() {
         data = new ArrayList<>();
     }
 
-    public void setData(List<Doctor> data) {
+    public void setData(List<User> data) {
         this.data = data;
         notifyDataSetChanged();
     }
@@ -31,14 +30,14 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DocHolder>
     @NonNull
     @Override
     public DoctorAdapter.DocHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order,parent,false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_order, parent, false);
         return new DoctorAdapter.DocHolder(v);
 
     }
 
     @Override
     public void onBindViewHolder(@NonNull DoctorAdapter.DocHolder holder, int position) {
-        final Doctor doc = data.get(position);
+        final User doc = data.get(position);
 
     }
 
@@ -48,7 +47,7 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DocHolder>
     }
 
     class DocHolder extends RecyclerView.ViewHolder {
-        public DocHolder(@NonNull View itemView) {
+        DocHolder(@NonNull View itemView) {
             super(itemView);
         }
     }

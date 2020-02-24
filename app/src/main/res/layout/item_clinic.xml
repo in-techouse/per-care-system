@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="7dp"
     app:cardCornerRadius="11dp"
-    app:cardElevation="11dp"
-    android:layout_margin="7dp">
+    app:cardElevation="11dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,133 +14,143 @@
         android:padding="7dp">
 
         <RelativeLayout
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
             <TextView
-                android:textSize="17dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:text="Name"
-                android:textStyle="bold"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
+                android:textSize="17dp"
+                android:textStyle="bold" />
+
             <TextView
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:id="@+id/name"/>
+                android:layout_centerVertical="true" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
             <TextView
-                android:textSize="17dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:text="Number"
-                android:textStyle="bold"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
-            <TextView
                 android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/number"/>
+                android:textSize="17dp" />
         </RelativeLayout>
 
 
-
         <RelativeLayout
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
             <TextView
-                android:textSize="17dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:text="Address"
-                android:textStyle="bold"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
-            <TextView
                 android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/address"/>
+                android:textSize="17dp" />
         </RelativeLayout>
 
 
-
         <RelativeLayout
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
             <TextView
-                android:textSize="17dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:text="Start Timing"
-                android:textStyle="bold"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
-            <TextView
                 android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/startTiming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/startTiming"/>
+                android:textSize="17dp" />
         </RelativeLayout>
 
 
         <RelativeLayout
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
             <TextView
-                android:textSize="17dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
                 android:text="End Timing"
-                android:textStyle="bold"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
-            <TextView
                 android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/endTiming"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/endTiming"/>
+                android:textSize="17dp" />
         </RelativeLayout>
 
         <RelativeLayout
-            android:layout_marginTop="3dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp">
+
             <TextView
-                android:textSize="17dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fee"
-                android:textStyle="bold"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true" />
-            <TextView
+                android:layout_centerVertical="true"
+                android:text="Fee"
                 android:textSize="17dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:id="@+id/fee"/>
+                android:textSize="17dp" />
         </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

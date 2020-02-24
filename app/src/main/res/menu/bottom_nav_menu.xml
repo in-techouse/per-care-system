@@ -3,22 +3,21 @@
 
     <item
         android:id="@+id/navigation_food"
-        android:icon="@drawable/food"
-        android:title="Food"/>
+        android:icon="@drawable/pet_food_64"
+        android:title="Food" />
 
     <item
         android:id="@+id/navigation_doctor"
-        android:icon="@drawable/doctor"
-        android:title="Doctors"/>
+        android:icon="@drawable/pet_doctor"
+        android:title="Doctors" />
     <item
         android:id="@+id/navigation_clinic"
-        android:icon="@drawable/clinic"
-        android:title="Clinics"/>
-
+        android:icon="@drawable/pet_clinic"
+        android:title="Clinics" />
 
     <item
-            android:id="@+id/navigation_profile"
-            android:icon="@drawable/profile_icon"
-            android:title="@string/title_profile" />
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/user_profile"
+        android:title="@string/title_profile" />
 
 </menu>

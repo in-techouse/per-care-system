@@ -1,53 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/Loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:padding="12dp"
-        android:id="@+id/Loading"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="12dp">
 
-      <ProgressBar
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_gravity="center"/>
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Loading Notifications"
             android:layout_margin="7dp"
             android:padding="7dp"
-            android:textAlignment="center"/>
+            android:text="Loading Notifications"
+            android:textAlignment="center" />
     </LinearLayout>
 
     <TextView
+        android:id="@+id/noNotification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="No Notifications Found"
+        android:layout_alignParentTop="true"
         android:layout_margin="7dp"
         android:padding="7dp"
+        android:text="No Notifications Found"
         android:textAlignment="center"
-        android:id="@+id/noNotification"
-        android:layout_alignParentTop="true"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notifications"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/notifications"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:visibility="gone"/>
-
+        android:layout_alignParentBottom="true"
+        android:visibility="gone" />
 
 
 </RelativeLayout>

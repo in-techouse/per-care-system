@@ -1,14 +1,7 @@
 package lcwu.fyp.petcaresystem.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,15 +10,15 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.shreyaspatil.MaterialDialog.MaterialDialog;
-import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Helpers;
@@ -34,12 +27,11 @@ import lcwu.fyp.petcaresystem.model.User;
 
 public class RegistrationActivity extends AppCompatActivity implements View.OnClickListener {
 
-      Button btnSubmit;
-      TextView go_To_Login;
-      EditText edtFirstName, edtLastName, edtEmail, edtPhone, edtPassword, edtCnfrmPass;
-      String str1stName, strLastName, strEmail, strPh, strPass, strCnfmPass;
-      ProgressBar registrationProgress;
-      Helpers helpers;
+    private Button btnSubmit;
+    private EditText edtFirstName, edtLastName, edtEmail, edtPhone, edtPassword, edtCnfrmPass;
+    private String str1stName, strLastName, strEmail, strPh, strPass, strCnfmPass;
+    private ProgressBar registrationProgress;
+    private Helpers helpers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,19 +40,19 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
         helpers = new Helpers();
 
-       btnSubmit=findViewById(R.id.btnSubmit);
-       go_To_Login=findViewById(R.id.go_To_Login);
+        btnSubmit = findViewById(R.id.btnSubmit);
+        TextView go_To_Login = findViewById(R.id.go_To_Login);
 
-      edtFirstName= findViewById(R.id.edtFirstName);
-      edtLastName= findViewById(R.id.edtLastName);
-      edtEmail= findViewById(R.id.edtEmail);
-      edtPhone= findViewById(R.id.edtphone);
-      edtPassword= findViewById(R.id.edtpassword);
-      edtCnfrmPass= findViewById(R.id.edtCnfrmPass);
-      registrationProgress= findViewById(R.id.registrationProgress);
+        edtFirstName = findViewById(R.id.edtFirstName);
+        edtLastName = findViewById(R.id.edtLastName);
+        edtEmail = findViewById(R.id.edtEmail);
+        edtPhone = findViewById(R.id.edtphone);
+        edtPassword = findViewById(R.id.edtpassword);
+        edtCnfrmPass = findViewById(R.id.edtCnfrmPass);
+        registrationProgress = findViewById(R.id.registrationProgress);
 
-       btnSubmit.setOnClickListener(this);
-       go_To_Login.setOnClickListener(this);
+        btnSubmit.setOnClickListener(this);
+        go_To_Login.setOnClickListener(this);
 
     }
 
@@ -68,9 +60,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
 
-      int id=v.getId();
-      switch (id)
-        {
+        int id = v.getId();
+        switch (id) {
             case R.id.btnSubmit: {
                 str1stName = edtFirstName.getText().toString();
                 strLastName = edtLastName.getText().toString();
@@ -81,9 +72,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
                 //check internet
                 boolean isConn = helpers.isConnected(RegistrationActivity.this);
-                if (!isConn)
-                {
-                    helpers.showError(RegistrationActivity.this , "Internet Connection Error" ,"Not Connected To Internet! Check Your Connection And Try Again" );
+                if (!isConn) {
+                    helpers.showError(RegistrationActivity.this, "Internet Connection Error", "Not Connected To Internet! Check Your Connection And Try Again");
                     return;
                 }
 
@@ -110,45 +100,46 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                     user.setEmail(strEmail);
                                     user.setPhNo(strPh);
                                     user.setQualification("");
+                                    user.setImage("");
                                     user.setRole(1);
-                                    String id= strEmail.replace("@" , "-");
-                                    id = id.replace("." , "_");
+                                    String id = strEmail.replace("@", "-");
+                                    id = id.replace(".", "_");
                                     user.setId(id);
 
 
-                                   reference.child("Users").child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                       @Override
-                                       public void onSuccess(Void aVoid) {
-                                           Session session = new Session(RegistrationActivity.this);
-                                           session.setSession(user);
+                                    reference.child("Users").child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                        @Override
+                                        public void onSuccess(Void aVoid) {
+                                            Session session = new Session(RegistrationActivity.this);
+                                            session.setSession(user);
 
-                                           //start dashboard activity
-                                           Intent intent = new Intent(RegistrationActivity.this , Dashboard.class);
-                                           intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                           startActivity(intent);
-                                           finish();
+                                            //start dashboard activity
+                                            Intent intent = new Intent(RegistrationActivity.this, Dashboard.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                            startActivity(intent);
+                                            finish();
 
-                                       }
-                                   }).addOnFailureListener(new OnFailureListener() {
-                                       @Override
-                                       public void onFailure(@NonNull Exception e) {
+                                        }
+                                    }).addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
 
-                                           registrationProgress.setVisibility(View.GONE);
-                                           btnSubmit.setVisibility(View.VISIBLE);
-                                           helpers.showError(RegistrationActivity.this , "Registration Failed!" , e.getMessage());
-                                       }
+                                            registrationProgress.setVisibility(View.GONE);
+                                            btnSubmit.setVisibility(View.VISIBLE);
+                                            helpers.showError(RegistrationActivity.this, "REGISTRATION FAILED!", "Something went wrong.\n Please try again later");
+                                        }
 
-                                   });
+                                    });
 
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    registrationProgress.setVisibility(View.GONE);
-                                    btnSubmit.setVisibility(View.VISIBLE);
-                                    helpers.showError(RegistrationActivity.this , "Registration Failed!" , e.getMessage());
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            registrationProgress.setVisibility(View.GONE);
+                            btnSubmit.setVisibility(View.VISIBLE);
+                            helpers.showError(RegistrationActivity.this, "REGISTRATION FAILED!", e.getMessage());
 
-                                }
+                        }
                     });
 
                 }
@@ -156,78 +147,72 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
             }
             //go to next activity
 
-            case R.id.go_To_Login:
-         {
-             finish();
-             break;
-         }
+            case R.id.go_To_Login: {
+                finish();
+                break;
+            }
 
         }
     }
 
 
-  private boolean isValid()
-  {
-      boolean flag= true;
-      if (str1stName.length()<3) {
-          edtFirstName.setError("Enter a valid Name");
-          flag= false;
-      }
-      else {
-          edtFirstName.setError(null);
-      }
+    private boolean isValid() {
+        boolean flag = true;
+        if (str1stName.length() < 3) {
+            edtFirstName.setError("Enter a valid Name");
+            flag = false;
+        } else {
+            edtFirstName.setError(null);
+        }
 
 
-
-      if (strLastName.length()<3) {
-          edtLastName.setError("Enter a valid Name");
-          flag= false;
-      }
-      else {
-          edtLastName.setError(null);
-      }
+        if (strLastName.length() < 3) {
+            edtLastName.setError("Enter a valid Name");
+            flag = false;
+        } else {
+            edtLastName.setError(null);
+        }
 
 
-      if (strEmail.length()<6 || !Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()) {
-          edtEmail.setError("Enter a valid Email");
-          flag= false;
-      }
-      else {
-          edtEmail.setError(null);
-      }
+        if (strEmail.length() < 6 || !Patterns.EMAIL_ADDRESS.matcher(strEmail).matches()) {
+            edtEmail.setError("Enter a valid Email");
+            flag = false;
+        } else {
+            edtEmail.setError(null);
+        }
 
 
-      if (strPh.length() != 11) {
-          edtPhone.setError("Enter a valid Mobile Number");
-          flag= false;
-      }
-      else {
-          edtPhone.setError(null);
-      }
+        if (strPh.length() != 11) {
+            edtPhone.setError("Enter a valid Mobile Number");
+            flag = false;
+        } else {
+            edtPhone.setError(null);
+        }
 
 
-      if (strPass.length()<6)
-      {
-          edtPassword.setError("Enter a valid Password");
-          flag= false;
-      }
-      else
-      {
-          edtPassword.setError(null);
-      }
+        if (strPass.length() < 6) {
+            edtPassword.setError("Enter a valid Password");
+            flag = false;
+        } else {
+            edtPassword.setError(null);
+        }
 
 
-      if (strCnfmPass.length()<6)
-      {
-          edtCnfrmPass.setError("Password does not Match");
-          flag= false;
-      }
-      else
-      {
-          edtCnfrmPass.setError(null);
-      }
-      return flag;
-  }
+        if (strCnfmPass.length() < 6) {
+            edtCnfrmPass.setError("Password does not Match");
+            flag = false;
+        } else {
+            edtCnfrmPass.setError(null);
+        }
+
+        if (strCnfmPass.length() > 5 && strPass.length() > 5 && !strPass.equals(strCnfmPass)) {
+            edtCnfrmPass.setError("Password doesn't match");
+            flag = false;
+        } else {
+            edtCnfrmPass.setError(null);
+        }
+        return flag;
+    }
 
     @Override
     public void onBackPressed() {
