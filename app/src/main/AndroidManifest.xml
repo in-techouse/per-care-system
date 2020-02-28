@@ -19,6 +19,14 @@
         android:windowSoftInputMode="stateHidden"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".activities.ShowClinicDetails"
+            android:label="@string/title_activity_show_clinic_details"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activities.FixAppointment"
+            android:label="@string/title_activity_fix_appointment"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".activities.CartActivity"
             android:label="@string/app_name"
             android:parentActivityName=".activities.Dashboard"

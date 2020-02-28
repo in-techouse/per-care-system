@@ -3,6 +3,7 @@ package lcwu.fyp.petcaresystem.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,7 @@ public class DoctorFragment extends Fragment {
         loading = v.findViewById(R.id.Loading);
         noDoctor = v.findViewById(R.id.noDoctor);
         doctors = v.findViewById(R.id.doctors);
-        adapter= new DoctorAdapter();
+        adapter= new DoctorAdapter(getActivity());
         doctors.setLayoutManager(new LinearLayoutManager(getActivity()));
         doctors.setAdapter(adapter);
         session = new Session(getActivity());
@@ -86,13 +87,17 @@ public class DoctorFragment extends Fragment {
         reference.orderByChild("role").equalTo(2).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e("doctor" , "in data Change");
                 for(DataSnapshot d: dataSnapshot.getChildren()){
                     User doc = d.getValue(User.class);
+                    Log.e("doctor" , "Traversing");
                     if (doc != null)  {
+                        Log.e("doctor" , "got doc obj");
                         data.add(doc);
                     }
                 }
                 if (data.size()>0){
+                    Log.e("doctor" , "data size "+data.size());
                     adapter.setData(data);
                     doctors.setVisibility(View.VISIBLE);
                     noDoctor.setVisibility(View.GONE);

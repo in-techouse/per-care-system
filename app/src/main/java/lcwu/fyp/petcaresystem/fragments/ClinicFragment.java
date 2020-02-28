@@ -2,9 +2,11 @@ package lcwu.fyp.petcaresystem.fragments;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -62,7 +64,7 @@ public class ClinicFragment extends Fragment {
         loading = v.findViewById(R.id.Loading);
         noClinic = v.findViewById(R.id.noClinic);
         clinics = v.findViewById(R.id.clinics);
-        adapter = new ClinicAdapter();
+        adapter = new ClinicAdapter(getActivity());
         clinics.setLayoutManager(new LinearLayoutManager(getActivity()));
         clinics.setAdapter(adapter);
         session = new Session(getActivity());
@@ -89,9 +91,12 @@ public class ClinicFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.e("clinic data" , "in data change");
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     Clinic c = d.getValue(Clinic.class);
+                    Log.e("clinic data" , "got clinic obj");
                     if (c != null) {
+                        Log.e("clinic data" , "value being added");
                         data.add(c);
                     }
                 }

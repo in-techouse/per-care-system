@@ -124,4 +124,6 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="action_cart" />
+    <string name="title_activity_fix_appointment">FixAppointment</string>
+    <string name="title_activity_show_clinic_details">ShowClinicDetails</string>
 </resources>
