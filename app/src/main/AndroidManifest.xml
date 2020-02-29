@@ -18,10 +18,11 @@
         android:theme="@style/AppTheme"
         android:windowSoftInputMode="stateHidden"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".activities.ShowAppointmentDetails"></activity>
         <activity
             android:name=".activities.ShowClinicDetails"
             android:label="@string/title_activity_show_clinic_details"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activities.FixAppointment"
             android:label="@string/title_activity_fix_appointment"
