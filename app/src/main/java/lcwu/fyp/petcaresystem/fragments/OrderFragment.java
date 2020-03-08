@@ -41,7 +41,7 @@ public class OrderFragment extends Fragment {
     private Session session;
     private User user;
     private Helpers helpers;
-    private List <Order> data;
+    private List<Order> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Orders");
 
 
@@ -63,8 +63,8 @@ public class OrderFragment extends Fragment {
         return root;
     }
 
-    private void loadOrders(){
-        if(!helpers.isConnected(getActivity())) {
+    private void loadOrders() {
+        if (!helpers.isConnected(getActivity())) {
             helpers.showError(getActivity(), "Internet Error", "No Internet Connection!");
             return;
         }

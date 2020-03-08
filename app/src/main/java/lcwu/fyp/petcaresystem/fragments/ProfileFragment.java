@@ -3,15 +3,19 @@ package lcwu.fyp.petcaresystem.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.activities.Appointments;
@@ -30,14 +34,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private Session session;
     private User user;
     private TextView name, email, phone;
-    private CardView edit,orders, notificaitons, appointments, logout;
+    private CardView edit, orders, notificaitons, appointments, logout;
     private CircleImageView profile_image;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
-
-
 
 
     @Override
@@ -49,16 +51,16 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         user = session.getUser();
 
         name = v.findViewById(R.id.name);
-        email= v.findViewById(R.id.email);
-        phone= v.findViewById(R.id.phnNumber);
-        edit= v.findViewById(R.id.edit);
+        email = v.findViewById(R.id.email);
+        phone = v.findViewById(R.id.phnNumber);
+        edit = v.findViewById(R.id.edit);
         profile_image = v.findViewById(R.id.profile_image);
         orders = v.findViewById(R.id.orders);
         notificaitons = v.findViewById(R.id.notifications);
         appointments = v.findViewById(R.id.appointments);
         logout = v.findViewById(R.id.logout);
 
-        if(user.getImage() != null && !user.getImage().equalsIgnoreCase("")){
+        if (user.getImage() != null && !user.getImage().equalsIgnoreCase("")) {
             Glide.with(getActivity()).load(user.getImage()).into(profile_image);
         }
 
@@ -70,42 +72,42 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         notificaitons.setOnClickListener(this);
         appointments.setOnClickListener(this);
         logout.setOnClickListener(this);
-        return  v;
+        return v;
     }
 
     @Override
     public void onClick(View view) {
         int id = view.getId();
         switch (id) {
-            case R.id.edit:{
-                Intent it= new Intent( getActivity(), EditUserProfile.class);
+            case R.id.edit: {
+                Intent it = new Intent(getActivity(), EditUserProfile.class);
                 startActivity(it);
                 break;
             }
-            case R.id.orders:{
+            case R.id.orders: {
                 Log.e("Profile", "Order");
-                Intent it = new Intent(getActivity() , Orders.class);
+                Intent it = new Intent(getActivity(), Orders.class);
                 startActivity(it);
                 break;
             }
-            case R.id.notifications:{
+            case R.id.notifications: {
                 Log.e("Profile", "Notifications");
-                Intent it = new Intent(getActivity() , Notifications.class);
+                Intent it = new Intent(getActivity(), Notifications.class);
                 startActivity(it);
                 break;
             }
-            case R.id.appointments:{
+            case R.id.appointments: {
                 Log.e("Profile", "Appointments");
-                Intent it = new Intent(getActivity() , Appointments.class);
+                Intent it = new Intent(getActivity(), Appointments.class);
                 startActivity(it);
                 break;
             }
-            case R.id.logout:{
+            case R.id.logout: {
                 Log.e("Profile", "Logout");
                 FirebaseAuth auth = FirebaseAuth.getInstance();
                 auth.signOut();
                 session.destroySession();
-                Intent it= new Intent( getActivity(), LoginActivity.class);
+                Intent it = new Intent(getActivity(), LoginActivity.class);
                 it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(it);
                 getActivity().finish();

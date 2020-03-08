@@ -46,12 +46,12 @@ public class DoctorFragment extends Fragment {
     private List<User> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
     private DoctorAdapter adapter;
+
     public static DoctorFragment newInstance() {
         DoctorFragment myFragment = new DoctorFragment();
 
         return myFragment;
     }
-
 
 
     @Override
@@ -63,7 +63,7 @@ public class DoctorFragment extends Fragment {
         loading = v.findViewById(R.id.Loading);
         noDoctor = v.findViewById(R.id.noDoctor);
         doctors = v.findViewById(R.id.doctors);
-        adapter= new DoctorAdapter(getActivity());
+        adapter = new DoctorAdapter(getActivity());
         doctors.setLayoutManager(new LinearLayoutManager(getActivity()));
         doctors.setAdapter(adapter);
         session = new Session(getActivity());
@@ -87,28 +87,27 @@ public class DoctorFragment extends Fragment {
         reference.orderByChild("role").equalTo(2).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("doctor" , "in data Change");
-                for(DataSnapshot d: dataSnapshot.getChildren()){
+                Log.e("doctor", "in data Change");
+                data.clear();
+                for (DataSnapshot d : dataSnapshot.getChildren()) {
                     User doc = d.getValue(User.class);
-                    Log.e("doctor" , "Traversing");
-                    if (doc != null)  {
-                        Log.e("doctor" , "got doc obj");
+                    Log.e("doctor", "Traversing");
+                    if (doc != null) {
+                        Log.e("doctor", "got doc obj");
                         data.add(doc);
                     }
                 }
-                if (data.size()>0){
-                    Log.e("doctor" , "data size "+data.size());
+                if (data.size() > 0) {
+                    Log.e("doctor", "data size " + data.size());
                     adapter.setData(data);
                     doctors.setVisibility(View.VISIBLE);
                     noDoctor.setVisibility(View.GONE);
-                }
-                else{
+                } else {
                     doctors.setVisibility(View.GONE);
                     noDoctor.setVisibility(View.VISIBLE);
                 }
                 loading.setVisibility(View.GONE);
             }
-
 
 
             @Override

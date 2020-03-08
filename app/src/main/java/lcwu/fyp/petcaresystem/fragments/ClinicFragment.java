@@ -91,12 +91,13 @@ public class ClinicFragment extends Fragment {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("clinic data" , "in data change");
+                Log.e("clinic data", "in data change");
+                data.clear();
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     Clinic c = d.getValue(Clinic.class);
-                    Log.e("clinic data" , "got clinic obj");
+                    Log.e("clinic data", "got clinic obj");
                     if (c != null) {
-                        Log.e("clinic data" , "value being added");
+                        Log.e("clinic data", "value being added");
                         data.add(c);
                     }
                 }
