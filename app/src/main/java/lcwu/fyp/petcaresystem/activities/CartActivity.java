@@ -1,15 +1,16 @@
 package lcwu.fyp.petcaresystem.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,16 +19,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import lcwu.fyp.petcaresystem.R;
-import lcwu.fyp.petcaresystem.adapters.FoodAdapter;
+import lcwu.fyp.petcaresystem.adapters.CartAdapter;
 import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.Cart;
+import lcwu.fyp.petcaresystem.model.CartFood;
 import lcwu.fyp.petcaresystem.model.Food;
 
-public class CartActivity extends AppCompatActivity implements View.OnClickListener{
+public class CartActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Session session;
     private Cart cart;
@@ -36,7 +40,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     private Helpers helpers;
     private LinearLayout loading;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Foods");
-    private List<Food> data = new ArrayList<>();
+    private List<CartFood> cartFoods = new ArrayList<>();
+    private CartAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,18 +50,21 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
 
         session = new Session(getApplicationContext());
         cart = session.getCart();
-        if(cart == null){
+        if (cart == null) {
             cart = new Cart();
         }
 
         helpers = new Helpers();
 
         carts = findViewById(R.id.carts);
+        carts.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         checkout = findViewById(R.id.checkout);
         loading = findViewById(R.id.loading);
         carts.setVisibility(View.GONE);
         checkout.setVisibility(View.GONE);
         checkout.setOnClickListener(this);
+        adapter = new CartAdapter(getApplicationContext());
+        carts.setAdapter(adapter);
         loadFoods();
     }
 
@@ -71,16 +79,30 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                data.clear();
+                cartFoods.clear();
                 Log.e("Cart", "Food DataSnapshot: " + dataSnapshot.toString());
+                HashMap<String, Integer> cartItems = cart.getCartItems();
+
                 for (DataSnapshot d : dataSnapshot.getChildren()) {
                     Log.e("Cart", "Food Loop Data: " + d.toString());
                     Food f = d.getValue(Food.class);
                     if (f != null) {
                         Log.e("Cart", "If Food: " + f.getName());
-                        data.add(f);
+                        if (cartItems.containsKey(f.getId())) {
+                            Log.e("Cart", "Cart food is found");
+                            for (Map.Entry<String, Integer> stringIntegerEntry : cartItems.entrySet()) {
+                                Map.Entry pair = (Map.Entry) stringIntegerEntry;
+                                Log.e("FoodOrder", pair.getKey() + " = " + pair.getValue());
+                                if (pair.getKey().equals(f.getId())) {
+                                    CartFood cartFood = new CartFood(f, (int) pair.getValue());
+                                    cartFoods.add(cartFood);
+                                }
+                            }
+                        }
                     }
                 }
+                Log.e("Cart", "Cart foods list size: " + cartFoods.size());
+                adapter.setCartFoods(cartFoods);
 
                 loading.setVisibility(View.GONE);
                 carts.setVisibility(View.VISIBLE);
@@ -99,8 +121,8 @@ public class CartActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
-            case R.id.checkout:{
+        switch (id) {
+            case R.id.checkout: {
                 break;
             }
         }
