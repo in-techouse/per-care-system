@@ -1,8 +1,5 @@
 package lcwu.fyp.petcaresystem.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
@@ -22,21 +22,19 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.Appointment;
-import lcwu.fyp.petcaresystem.model.Clinic;
 import lcwu.fyp.petcaresystem.model.User;
 
 public class ShowAppointmentDetails extends AppCompatActivity {
 
     private Appointment appointment;
     DatabaseReference userReference = FirebaseDatabase.getInstance().getReference().child("Users");
-    private TextView detailDate , detailTime , detailCategory  , detailDName , detailAddress , detailStatus  , detailD_Phone;
-    User doctorDetails , patientDetails;
+    private TextView detailDate, detailTime, detailCategory, detailDName, detailAddress, detailStatus, detailD_Phone, docQualification;
+    User doctorDetails, patientDetails;
     CircleImageView detailImage;
     RelativeLayout appointmentDetailsProgress;
     LinearLayout mainDetails;
     User user;
     Session session;
-
 
 
     @Override
@@ -63,8 +61,8 @@ public class ShowAppointmentDetails extends AppCompatActivity {
             Log.e("Appointment details", "Booking is NULL");
             finish();
             return;
-        }else {
-            Log.e("Fix Appointment" , "got the Appointment  details");
+        } else {
+            Log.e("Fix Appointment", "got the Appointment  details");
         }
         detailDate = findViewById(R.id.detailDate);
         detailTime = findViewById(R.id.detailTime);
@@ -72,20 +70,20 @@ public class ShowAppointmentDetails extends AppCompatActivity {
         detailDName = findViewById(R.id.detailDName);
         detailAddress = findViewById(R.id.detailAddress);
         detailStatus = findViewById(R.id.detailStatus);
-        detailD_Phone = findViewById(R.id. detailD_Phone);
+        detailD_Phone = findViewById(R.id.detailD_Phone);
         appointmentDetailsProgress = findViewById(R.id.appointmentDetailsProgress);
         mainDetails = findViewById(R.id.mainDetails);
         detailImage = findViewById(R.id.detailImage);
+        docQualification = findViewById(R.id.docQualification);
         session = new Session(ShowAppointmentDetails.this);
         user = session.getUser();
 
         getDetails();
 
 
-
     }
 
-    void getDetails(){
+    void getDetails() {
 
         appointmentDetailsProgress.setVisibility(View.VISIBLE);
 
@@ -93,31 +91,29 @@ public class ShowAppointmentDetails extends AppCompatActivity {
         userReference.child(appointment.getDoctorId()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.e("details" , "received values are "+dataSnapshot);
+                Log.e("details", "received values are " + dataSnapshot);
                 doctorDetails = dataSnapshot.getValue(User.class);
-                Log.e("details" , "received values are "+doctorDetails.getFirstName());
+                Log.e("details", "received values are " + doctorDetails.getFirstName());
 
-                        Log.e("details" ,"received object "+dataSnapshot);
+                Log.e("details", "received object " + dataSnapshot);
                 if (doctorDetails.getImage() != null && doctorDetails.getImage().length() > 0) {
                     Log.e("adapter", "image added");
                     Glide.with(ShowAppointmentDetails.this).load(doctorDetails.getImage()).into(detailImage);
-                }else {
+                } else {
                     Log.e("adapter", "Image not  found");
                 }
-                        appointmentDetailsProgress.setVisibility(View.GONE);
-                        mainDetails.setVisibility(View.VISIBLE);
-                        patientDetails = dataSnapshot.getValue(User.class);
-                        Log.e("details" ,"received object "+patientDetails.getFirstName());
-                        detailDate.setText(appointment.getDate());
-                        detailTime.setText(appointment.getTime());
-                        detailCategory.setText(appointment.getCategory());
-                        detailAddress.setText(appointment.getAddress());
-                        detailStatus.setText(appointment.getStatus());
-                        detailD_Phone.setText(doctorDetails.getPhNo());
-                        detailDName.setText(doctorDetails.getFirstName()+" "+doctorDetails.getLastName());
-
-
-
+                appointmentDetailsProgress.setVisibility(View.GONE);
+                mainDetails.setVisibility(View.VISIBLE);
+                patientDetails = dataSnapshot.getValue(User.class);
+                Log.e("details", "received object " + patientDetails.getFirstName());
+                detailDate.setText(appointment.getDate());
+                detailTime.setText(appointment.getTime());
+                detailCategory.setText(appointment.getCategory());
+                detailAddress.setText(appointment.getAddress());
+                detailStatus.setText(appointment.getStatus());
+                detailD_Phone.setText(doctorDetails.getPhNo());
+                detailDName.setText(doctorDetails.getFirstName() + " " + doctorDetails.getLastName());
+                docQualification.setText(doctorDetails.getQualification());
             }
 
             @Override
@@ -125,8 +121,6 @@ public class ShowAppointmentDetails extends AppCompatActivity {
 
             }
         });
-
-
 
 
     }

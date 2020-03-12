@@ -1,24 +1,28 @@
 package lcwu.fyp.petcaresystem.model;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 public class Order implements Serializable {
-    private String id, userId, productId, quantity, price, timings, userAddress;
-    private double latitude, longitude;
+    private String id, userId, firstName, lastName, phoneNumber, email, address, status;
+    private int totalItems, totalPrice;
+    private HashMap<String, Integer> cartItems;
 
     public Order() {
     }
 
-    public Order(String id, String userId, String productId, String quantity, String price, String timings, String userAddress, double latitude, double longitude) {
+    public Order(String id, String userId, String firstName, String lastName, String phoneNumber, String email, String address, String status, int totalItems, int totalPrice, HashMap<String, Integer> cartItems) {
         this.id = id;
         this.userId = userId;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.price = price;
-        this.timings = timings;
-        this.userAddress = userAddress;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.status = status;
+        this.totalItems = totalItems;
+        this.totalPrice = totalPrice;
+        this.cartItems = cartItems;
     }
 
     public String getId() {
@@ -37,59 +41,75 @@ public class Order implements Serializable {
         this.userId = userId;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getQuantity() {
-        return quantity;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setQuantity(String quantity) {
-        this.quantity = quantity;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getPrice() {
-        return price;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPrice(String price) {
-        this.price = price;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public String getTimings() {
-        return timings;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTimings(String timings) {
-        this.timings = timings;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getUserAddress() {
-        return userAddress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public String getStatus() {
+        return status;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public double getLongitude() {
-        return longitude;
+    public int getTotalItems() {
+        return totalItems;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setTotalItems(int totalItems) {
+        this.totalItems = totalItems;
+    }
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public HashMap<String, Integer> getCartItems() {
+        return cartItems;
+    }
+
+    public void setCartItems(HashMap<String, Integer> cartItems) {
+        this.cartItems = cartItems;
     }
 }

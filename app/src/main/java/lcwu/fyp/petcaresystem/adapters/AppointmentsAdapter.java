@@ -3,15 +3,12 @@ package lcwu.fyp.petcaresystem.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,7 +23,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     private List<Appointment> data;
     Context context;
 
-    public AppointmentsAdapter(Context context){
+    public AppointmentsAdapter(Context context) {
         this.context = context;
         data = new ArrayList<>();
 
@@ -36,7 +33,6 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         this.data = data;
         notifyDataSetChanged();
     }
-
 
 
     @NonNull
@@ -52,12 +48,14 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
         holder.appointmentTime.setText(appointment.getTime());
         holder.appointmentDate.setText(appointment.getDate());
         holder.petCategory.setText(appointment.getCategory());
+        holder.appintmentStatus.setText(appointment.getStatus());
+        holder.appintmentAddress.setText(appointment.getAddress());
         holder.appointmentMainCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent in = new Intent(context , ShowAppointmentDetails.class);
+                Intent in = new Intent(context, ShowAppointmentDetails.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable("appointment" , appointment);
+                bundle.putSerializable("appointment", appointment);
                 in.putExtras(bundle);
                 context.startActivity(in);
             }
@@ -72,7 +70,7 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
     }
 
     class AppointmentsHolder extends RecyclerView.ViewHolder {
-        TextView appointmentDate, appointmentTime, petCategory;
+        TextView appointmentDate, appointmentTime, petCategory, appintmentStatus, appintmentAddress;
         CardView appointmentMainCard;
 
 
@@ -81,6 +79,8 @@ public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapte
             appointmentDate = itemView.findViewById(R.id.appointmentDate);
             appointmentTime = itemView.findViewById(R.id.appintmentTime);
             petCategory = itemView.findViewById(R.id.appintmentCategory);
+            appintmentStatus = itemView.findViewById(R.id.appintmentStatus);
+            appintmentAddress = itemView.findViewById(R.id.appintmentAddress);
             appointmentMainCard = itemView.findViewById(R.id.appointmentMainCard);
 
         }

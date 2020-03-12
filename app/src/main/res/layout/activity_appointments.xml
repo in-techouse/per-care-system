@@ -6,7 +6,6 @@
     android:orientation="vertical"
     tools:context=".activities.Appointments">
 
-
     <LinearLayout
         android:id="@+id/appointmentsLoading"
         android:layout_width="match_parent"
@@ -27,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
             android:padding="7dp"
-            android:text="Loading Clinics"
+            android:text="Loading Your Appointments"
             android:textAlignment="center" />
     </LinearLayout>
 
@@ -38,7 +37,7 @@
         android:layout_alignParentTop="true"
         android:layout_margin="7dp"
         android:padding="7dp"
-        android:text="No Appointments Found"
+        android:text="No Appointment Found"
         android:textAlignment="center"
         android:visibility="gone" />
 

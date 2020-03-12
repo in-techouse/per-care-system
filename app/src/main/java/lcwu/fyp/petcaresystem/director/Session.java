@@ -26,6 +26,11 @@ public class Session {
         editor.commit();
     }
 
+    public void destroyCart() {
+        editor.remove("cart");
+        editor.commit();
+    }
+
     public void setSession(User user) {
         String value = gson.toJson(user);
         editor.putString("user", value);

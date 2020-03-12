@@ -6,7 +6,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,12 +30,7 @@ import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.Clinic;
 import lcwu.fyp.petcaresystem.model.User;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ClinicFragment extends Fragment {
-
-
     private LinearLayout loading;
     private TextView noClinic;
     private RecyclerView clinics;
@@ -46,12 +40,6 @@ public class ClinicFragment extends Fragment {
     private List<Clinic> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Clinics");
     private ClinicAdapter adapter;
-
-    public static ClinicFragment newInstance() {
-        ClinicFragment myFragment = new ClinicFragment();
-
-        return myFragment;
-    }
 
 
     @Override
@@ -71,11 +59,7 @@ public class ClinicFragment extends Fragment {
         user = session.getUser();
         helpers = new Helpers();
         data = new ArrayList<>();
-
-
         loadClinics();
-
-
         return v;
     }
 

@@ -4,51 +4,28 @@ import java.io.Serializable;
 
 public class Appointment implements Serializable {
 
-    private String  id;
-    private String time;
-    private String date;
-    private String address;
-    private String category;
+    private String id, time, date, address, category, patientId, doctorId, status;
 
-    private String patientId;
-
-    public String getStatus() {
-        return status;
+    public Appointment() {
     }
 
-    public void setStatus(String status) {
+    public Appointment(String id, String time, String date, String address, String category, String patientId, String doctorId, String status) {
+        this.id = id;
+        this.time = time;
+        this.date = date;
+        this.address = address;
+        this.category = category;
+        this.patientId = patientId;
+        this.doctorId = doctorId;
         this.status = status;
     }
 
-    private String doctorId;
-    private String status;
-
-    public String getId(){
+    public String getId() {
         return id;
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
-    }
-
-
-
-    public String getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
-    }
-
-
-
-    public String getDoctorId() {
-        return doctorId;
-    }
-
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
     }
 
     public String getTime() {
@@ -83,4 +60,27 @@ public class Appointment implements Serializable {
         this.category = category;
     }
 
+    public String getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(String patientId) {
+        this.patientId = patientId;
+    }
+
+    public String getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(String doctorId) {
+        this.doctorId = doctorId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

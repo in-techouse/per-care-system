@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".activities.FixAppointment"
     tools:showIn="@layout/activity_fix_appointment">
@@ -11,209 +12,192 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
+        android:focusableInTouchMode="true"
         android:orientation="vertical">
 
-
-        <TextView
+        <LinearLayout
+            android:id="@+id/main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:text="doc name"
-            android:id="@+id/docName"
-            android:textAlignment="center"
-            android:textSize="20dp"
-            android:textStyle="bold">
-        </TextView>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="doc name"
-            android:id="@+id/docDetail"
-            android:textAlignment="center"
-            android:textSize="20dp">
-        </TextView>
-
-
-    <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/appointmentForm"
-        android:layout_marginRight="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-
-
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:orientation="vertical">
 
             <TextView
-
-                android:layout_width="wrap_content"
+                android:id="@+id/docName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="Pick a Time"
-                android:id="@+id/timeText"
-                android:textSize="17dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="5dp"
+                android:text="doc name"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
-
-
+            <TextView
+                android:id="@+id/docContact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="5dp"
+                android:text="doc name"
+                android:textSize="18dp" />
 
             <TextView
-                android:visibility="visible"
-                android:id="@+id/savedTime"
-                android:text="Click Here"
-                android:layout_width="wrap_content"
+                android:id="@+id/docDetail"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="5dp"
+                android:text="doc name"
                 android:textSize="17dp" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="7dp"
+                android:layout_marginBottom="7dp"
+                android:background="@color/colorPrimaryDark" />
 
-            <TimePicker
-                android:visibility="gone"
-                android:id="@+id/appointment_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+            <LinearLayout
+                android:id="@+id/appointmentForm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:orientation="vertical">
 
 
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
 
-        </RelativeLayout>
+                    <TextView
+
+                        android:id="@+id/timeText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Pick a Time"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/savedTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:text="Select Time"
+                        android:textSize="17dp"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/dateText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Pick a Date"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/savedDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:focusable="false"
+                        android:text="Select Date"
+                        android:textSize="17dp"
+                        android:visibility="visible" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp">
+
+                    <TextView
+                        android:id="@+id/categoryText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="Select Pet Category"
+                        android:textSize="17dp"
+                        android:textStyle="bold" />
+
+
+                    <Spinner
+                        android:id="@+id/petCategory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:entries="@array/pets" />
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="top|start"
+                    android:hint="Enter Address Here"
+                    android:inputType="textMultiLine"
+                    android:maxLines="7"
+                    android:minLines="3" />
+
+
+                <TextView
+                    android:id="@+id/saveTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:text="Save Time"
+                    android:textAlignment="center"
+                    android:textSize="20dp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="Pick a Date"
-                android:id="@+id/dateText"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-
-            <TextView
-                android:visibility="visible"
-                android:id="@+id/savedDate"
-                android:text="Click Here"
-                android:focusable="false"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:textSize="17dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:text="Select A Pet Category"
-                android:id="@+id/categoryText"
-                android:textSize="17dp"
-                android:textStyle="bold" />
-
-
-
-            <Spinner
-                android:id="@+id/petCategory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"  />
-
-
-
-        </RelativeLayout>
-
-        <EditText
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter Address Here">
-
-        </EditText>
-
-        <Button
-            android:layout_marginTop="10dp"
-            android:id="@+id/fixAppointmentBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:text="Fix Appointment">
-
-        </Button>
-
-
-
-
-        <TextView
-            android:visibility="gone"
-            android:id="@+id/saveTime"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Save Time"
-            android:textSize="20dp">
-        </TextView>
-
-    </LinearLayout>
-
-        <RelativeLayout
-            android:visibility="gone"
-            android:id="@+id/loadingPanel"
+            android:id="@+id/loading"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center" >
+            android:gravity="center"
+            android:visibility="gone">
 
             <ProgressBar
+                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:indeterminate="true" />
         </RelativeLayout>
 
-
-        <Button
-            android:gravity="center"
-            android:visibility="visible"
-            android:layout_marginTop="10dp"
-            android:id="@+id/getAppointmentBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical|center_horizontal"
-            android:text="Get An Appointment">
-
-        </Button>
-
     </LinearLayout>
-
-
-
-
 
 
 </androidx.core.widget.NestedScrollView>

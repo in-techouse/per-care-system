@@ -24,11 +24,10 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
-                android:layout_width="match_parent"
                 android:id="@+id/doc_image"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/profile" />
-
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
@@ -37,26 +36,20 @@
                 app:layout_collapseMode="pin"
                 app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-
-
-
-
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <include layout="@layout/content_fix_appointment" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/getAppointmentBtn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Book an Appointment"
+        android:visibility="visible" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

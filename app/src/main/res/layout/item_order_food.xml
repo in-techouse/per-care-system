@@ -65,60 +65,31 @@
                 android:text="Quantity" />
 
             <RelativeLayout
-                android:layout_toEndOf="@id/foodImage"
-                android:layout_below="@id/foodPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/foodPrice"
+                android:layout_toEndOf="@id/foodImage"
                 android:padding="3dp">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/colorPrimary"
                     android:text="Total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/foodTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/colorPrimaryDark" />
             </RelativeLayout>
 
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:weightSum="3">
-
-            <ImageView
-                android:id="@+id/deleteItem"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_action_cart_delete" />
-
-            <ImageView
-                android:id="@+id/minusItem"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_action_cart_minus" />
-
-            <ImageView
-                android:id="@+id/addItem"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/ic_action_cart_plus" />
-
-        </LinearLayout>
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>

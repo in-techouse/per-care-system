@@ -9,21 +9,18 @@ import com.shreyaspatil.MaterialDialog.MaterialDialog;
 import com.shreyaspatil.MaterialDialog.interfaces.DialogInterface;
 
 import lcwu.fyp.petcaresystem.R;
-import lcwu.fyp.petcaresystem.activities.RegistrationActivity;
 
 public class Helpers {
     // Check Internet Connection
     public boolean isConnected(Context c) {
 
         boolean connected = false;
-        ConnectivityManager connectivityManager = (ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
         connected = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED || connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED;
-        return  connected;
+        return connected;
     }
 
-    public void showError(Activity a, String title , String message)
-    {
-
+    public void showError(Activity a, String title, String message) {
         MaterialDialog mDialog = new MaterialDialog.Builder(a)
                 .setTitle(title)
                 .setMessage(message)
@@ -42,11 +39,35 @@ public class Helpers {
                     }
                 })
                 .build();
+        // Show Dialog
+        mDialog.show();
+    }
+
+    public void showSuccessAndFinish(final Activity a, String title, String message) {
+
+        MaterialDialog mDialog = new MaterialDialog.Builder(a)
+                .setTitle(title)
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton("OK", R.drawable.ic_action_name, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                        a.finish();
+                    }
+                })
+                .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        dialogInterface.dismiss();
+                        a.finish();
+                    }
+                })
+                .build();
 
         // Show Dialog
         mDialog.show();
 
     }
-
 
 }

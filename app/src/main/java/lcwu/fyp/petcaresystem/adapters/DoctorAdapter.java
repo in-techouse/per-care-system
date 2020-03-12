@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -50,22 +51,23 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DocHolder>
     public void onBindViewHolder(@NonNull DoctorAdapter.DocHolder holder, int position) {
         final User doc = data.get(position);
 
-        if(doc!= null){
-            holder.doc_name.setText(doc.getFirstName()+" "+doc.getLastName());
-            Log.e("adapter" , "doc q is"+doc.getQualification());
+        if (doc != null) {
+            holder.doc_name.setText(doc.getFirstName() + " " + doc.getLastName());
+            Log.e("adapter", "doc q is" + doc.getQualification());
             holder.doc_detail.setText(doc.getQualification());
+            holder.doc_contact.setText(doc.getPhNo());
             if (doc.getImage() != null && doc.getImage().length() > 0) {
                 Log.e("adapter", "image added");
                 Glide.with(context).load(doc.getImage()).into(holder.docImage);
-            }else {
+            } else {
                 Log.e("adapter", "Image not  found");
             }
 
-            holder.fixAppointment.setOnClickListener(new View.OnClickListener() {
+            holder.mainCard.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Bundle bundle = new Bundle();
-                    Intent in = new Intent(context , FixAppointment.class);
+                    Intent in = new Intent(context, FixAppointment.class);
                     bundle.putSerializable("doc", doc);
                     in.putExtras(bundle);
                     context.startActivity(in);
@@ -82,21 +84,18 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DocHolder>
     }
 
 
-
-
     class DocHolder extends RecyclerView.ViewHolder {
         CircleImageView docImage;
-        TextView doc_detail , doc_name , fixAppointment;
+        TextView doc_detail, doc_name, doc_contact;
+        CardView mainCard;
 
         DocHolder(@NonNull View itemView) {
             super(itemView);
             doc_name = itemView.findViewById(R.id.doc_name);
             doc_detail = itemView.findViewById(R.id.doc_detail);
+            doc_contact = itemView.findViewById(R.id.doc_contact);
             docImage = itemView.findViewById(R.id.docImage);
-            fixAppointment = itemView.findViewById(R.id.fixAppointment);
-
+            mainCard = itemView.findViewById(R.id.mainCard);
         }
-
-
     }
 }

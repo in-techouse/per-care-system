@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -19,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lcwu.fyp.petcaresystem.R;
-import lcwu.fyp.petcaresystem.activities.FixAppointment;
 import lcwu.fyp.petcaresystem.activities.ShowClinicDetails;
 import lcwu.fyp.petcaresystem.model.Clinic;
 
@@ -47,22 +47,22 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicHold
     @Override
     public void onBindViewHolder(@NonNull ClinicHolder holder, int position) {
         final Clinic c = data.get(position);
-        Log.e("adapter" , "in BindViewHolder Holder");
-        Log.e("adapter" , c.getName()+" in BindViewHolder Holder");
+        Log.e("adapter", "in BindViewHolder Holder");
+        Log.e("adapter", c.getName() + " in BindViewHolder Holder");
         holder.name.setText(c.getName());
         if (c.getImage() != null && c.getImage().length() > 0) {
             Log.e("adapter", "image added");
             Glide.with(context).load(c.getImage()).into(holder.imageView);
-        }else {
+        } else {
             Log.e("adapter", "Image not  found");
         }
         holder.fee.setText(c.getFee() + " RS.");
 
-        holder.showMore.setOnClickListener(new View.OnClickListener() {
+        holder.main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
-                Intent in = new Intent(context , ShowClinicDetails.class);
+                Intent in = new Intent(context, ShowClinicDetails.class);
                 bundle.putSerializable("clinic", c);
                 in.putExtras(bundle);
                 context.startActivity(in);
@@ -77,16 +77,17 @@ public class ClinicAdapter extends RecyclerView.Adapter<ClinicAdapter.ClinicHold
     }
 
     class ClinicHolder extends RecyclerView.ViewHolder {
-        TextView name, fee , showMore;
+        TextView name, fee;
+        CardView main;
         ImageView imageView;
 
         ClinicHolder(@NonNull View itemView) {
             super(itemView);
-            Log.e("adapter" , "in Clinic Holder");
+            Log.e("adapter", "in Clinic Holder");
             imageView = itemView.findViewById(R.id.clinic_image);
             name = itemView.findViewById(R.id.clinic_name);
             fee = itemView.findViewById(R.id.clinic_fee);
-            showMore = itemView.findViewById(R.id.showMore);
+            main = itemView.findViewById(R.id.main);
 
         }
     }

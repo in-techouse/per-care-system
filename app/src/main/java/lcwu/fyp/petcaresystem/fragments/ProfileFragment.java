@@ -3,15 +3,15 @@ package lcwu.fyp.petcaresystem.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,15 +26,14 @@ import lcwu.fyp.petcaresystem.activities.Orders;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.model.User;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ProfileFragment extends Fragment implements View.OnClickListener {
 
     private Session session;
     private User user;
     private TextView name, email, phone;
-    private CardView edit, orders, notificaitons, appointments, logout;
+    private LinearLayout logout;
+    private RelativeLayout orders, notifications, appointments;
+    private TextView edit;
     private CircleImageView profile_image;
 
     public ProfileFragment() {
@@ -56,7 +55,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         edit = v.findViewById(R.id.edit);
         profile_image = v.findViewById(R.id.profile_image);
         orders = v.findViewById(R.id.orders);
-        notificaitons = v.findViewById(R.id.notifications);
+        notifications = v.findViewById(R.id.notifications);
         appointments = v.findViewById(R.id.appointments);
         logout = v.findViewById(R.id.logout);
 
@@ -69,7 +68,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         phone.setText(user.getPhNo());
         edit.setOnClickListener(this);
         orders.setOnClickListener(this);
-        notificaitons.setOnClickListener(this);
+        notifications.setOnClickListener(this);
         appointments.setOnClickListener(this);
         logout.setOnClickListener(this);
         return v;

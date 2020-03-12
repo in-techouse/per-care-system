@@ -24,12 +24,10 @@
             app:toolbarId="@+id/toolbar">
 
             <ImageView
-                android:layout_width="match_parent"
                 android:id="@+id/clinic_image"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:src="@drawable/profile" />
-
-
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
@@ -41,7 +39,6 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_show_clinic_details" />
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

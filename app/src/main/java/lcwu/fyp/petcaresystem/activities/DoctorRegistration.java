@@ -71,7 +71,7 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
                 strPh = edtPhone.getText().toString();
                 strPass = edtPassword.getText().toString();
                 strCnfmPass = edtCnfrmPass.getText().toString();
-                strqualification = qualification.getText().getClass().toString();
+                strqualification = qualification.getText().toString();
 
                 //check internet
                 boolean isConn = helpers.isConnected(DoctorRegistration.this);

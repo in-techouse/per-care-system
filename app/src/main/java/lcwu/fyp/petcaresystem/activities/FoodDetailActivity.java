@@ -11,8 +11,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +25,7 @@ import lcwu.fyp.petcaresystem.model.Cart;
 import lcwu.fyp.petcaresystem.model.Food;
 
 public class FoodDetailActivity extends AppCompatActivity implements View.OnClickListener {
-
+    private CoordinatorLayout parent;
     private Food food;
     private ImageView image;
     private TextView name, type, price, weight, quantity;
@@ -59,12 +61,12 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
             return;
         }
 
-        toolbar.setTitle(food.getName().toUpperCase());
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         image = findViewById(R.id.image);
+        parent = findViewById(R.id.parent);
 
         Glide.with(getApplicationContext()).load(food.getImage()).into(image);
 
@@ -139,6 +141,14 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
                     Map.Entry pair = (Map.Entry) stringIntegerEntry;
                     Log.e("FoodOrder", pair.getKey() + " = " + pair.getValue());
                 }
+                Snackbar.make(parent, food.getName() + " added to cart successfully.", Snackbar.LENGTH_LONG)
+                        .setAction("CLOSE", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+
+                            }
+                        })
+                        .show();
                 break;
             }
         }

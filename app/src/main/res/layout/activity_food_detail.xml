@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.FoodDetailActivity">
+    tools:context=".activities.FoodDetailActivity"
+    android:id="@+id/parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/app_bar"

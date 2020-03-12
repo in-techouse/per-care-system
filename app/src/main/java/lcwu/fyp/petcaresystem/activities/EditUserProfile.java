@@ -1,7 +1,6 @@
 package lcwu.fyp.petcaresystem.activities;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -71,9 +70,8 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         session = new Session(EditUserProfile.this);
         user = session.getUser();
 
-        toolbar.setTitle(user.getFirstName());
         setSupportActionBar(toolbar);
-        if(getSupportActionBar()!= null)
+        if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         imageView = findViewById(R.id.userImage);
