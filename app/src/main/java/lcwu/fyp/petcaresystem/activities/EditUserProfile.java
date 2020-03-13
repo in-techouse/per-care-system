@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -44,15 +45,14 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
     };
-    private String strFirstName, strLastName, strEmail, strPhone = "";
+    private String strFirstName, strLastName, strEmail, strPhone, strQualification = "";
 
     private User user;
     private Session session;
     private Helpers helpers;
     private ImageView imageView;
-    private EditText firstName, lastName, email, phone;
+    private EditText firstName, lastName, email, phone, editQualification;
     private Button editSubmitBtn;
-    private DatabaseReference databaseReference;
     private boolean isImage;
     private Uri imagePath;
     private ProgressBar registrationProgress;
@@ -80,6 +80,8 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         phone = findViewById(R.id.editphone);
         email = findViewById(R.id.editEmail);
         editSubmitBtn = findViewById(R.id.editSubmitBtn);
+        TextInputLayout qualificationInput = findViewById(R.id.qualificationInput);
+        editQualification = findViewById(R.id.editQualification);
         registrationProgress = findViewById(R.id.registrationProgress);
 
 
@@ -94,6 +96,12 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         }
 
         editSubmitBtn.setOnClickListener(this);
+
+        if (user.getRole() == 1) {
+            qualificationInput.setVisibility(View.GONE);
+        } else {
+            editQualification.setText(user.getQualification());
+        }
     }
 
     private boolean isValid() {
@@ -121,6 +129,13 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
             phone.setError(null);
         }
 
+        if (user.getRole() == 2 && strQualification.length() < 3) {
+            editQualification.setError("Enter a valid Qualification");
+            flag = false;
+        } else {
+            editQualification.setError(null);
+        }
+
         return flag;
     }
 
@@ -142,6 +157,10 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
                 strLastName = lastName.getText().toString();
                 strEmail = email.getText().toString();
                 strPhone = phone.getText().toString();
+                strQualification = editQualification.getText().toString();
+                if (user.getRole() == 1) {
+                    strQualification = "";
+                }
                 boolean flag = isValid();
                 Log.e("Profile", "Validation Done");
                 if (flag) {
@@ -215,7 +234,8 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
         user.setFirstName(strFirstName);
         user.setLastName(strLastName);
         user.setPhNo(strPhone);
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getId());
+        user.setQualification(strQualification);
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("Users").child(user.getId());
         databaseReference.setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
@@ -244,18 +264,27 @@ public class EditUserProfile extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         dialogInterface.dismiss();
-                        Intent intent = new Intent(EditUserProfile.this, Dashboard.class);
+                        Intent intent;
+                        if (user.getRole() == 1) {
+                            intent = new Intent(EditUserProfile.this, Dashboard.class);
+                        } else {
+                            intent = new Intent(EditUserProfile.this, DoctorDashboard.class);
+                        }
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
-                        // Delete Operation
                     }
                 })
                 .setNegativeButton("Cancel", R.drawable.ic_action_close, new MaterialDialog.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         dialogInterface.dismiss();
-                        Intent intent = new Intent(EditUserProfile.this, Dashboard.class);
+                        Intent intent;
+                        if (user.getRole() == 1) {
+                            intent = new Intent(EditUserProfile.this, Dashboard.class);
+                        } else {
+                            intent = new Intent(EditUserProfile.this, DoctorDashboard.class);
+                        }
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();

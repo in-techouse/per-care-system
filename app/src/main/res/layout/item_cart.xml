@@ -65,26 +65,27 @@
                 android:text="Quantity" />
 
             <RelativeLayout
-                android:layout_toEndOf="@id/foodImage"
-                android:layout_below="@id/foodPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/foodPrice"
+                android:layout_toEndOf="@id/foodImage"
                 android:padding="3dp">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/colorPrimary"
                     android:text="Total"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/foodTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="@color/colorPrimaryDark" />
             </RelativeLayout>
 
         </RelativeLayout>

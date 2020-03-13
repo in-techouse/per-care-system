@@ -100,28 +100,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 Log.e("Login", dataSnapshot.getValue().toString());
                                                 //data is valid
                                                 User u = dataSnapshot.getValue(User.class);
-                                                if(u != null) {
+                                                if (u != null) {
 
                                                     Session session = new Session(LoginActivity.this);
                                                     session.setSession(u);
                                                     //start dashboard activity
-                                                    if(u.getRole() == 1){
+                                                    if (u.getRole() == 1) {
                                                         Intent intent = new Intent(LoginActivity.this, Dashboard.class);
                                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                         startActivity(intent);
                                                         finish();
-                                                    }
-                                                    else if(u.getRole() == 2){
+                                                    } else if (u.getRole() == 2) {
                                                         Intent intent = new Intent(LoginActivity.this, DoctorDashboard.class);
                                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                         startActivity(intent);
                                                         finish();
-                                                    }
-                                                    else{
+                                                    } else {
                                                         helpers.showError(LoginActivity.this, "LOGIN FAILED!", "It looks like that yoo're not authorized to login here.");
                                                     }
-                                                }
-                                                else{
+                                                } else {
                                                     Log.e("login", "in inner else");
                                                     helpers.showError(LoginActivity.this, "LOGIN FAILED!", "Something went wrong.\nPlease try again later.");
                                                 }

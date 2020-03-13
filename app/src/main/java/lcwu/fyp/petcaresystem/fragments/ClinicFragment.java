@@ -34,8 +34,6 @@ public class ClinicFragment extends Fragment {
     private LinearLayout loading;
     private TextView noClinic;
     private RecyclerView clinics;
-    private Session session;
-    private User user;
     private Helpers helpers;
     private List<Clinic> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Clinics");
@@ -55,8 +53,8 @@ public class ClinicFragment extends Fragment {
         adapter = new ClinicAdapter(getActivity());
         clinics.setLayoutManager(new LinearLayoutManager(getActivity()));
         clinics.setAdapter(adapter);
-        session = new Session(getActivity());
-        user = session.getUser();
+        Session session = new Session(getActivity());
+        User user = session.getUser();
         helpers = new Helpers();
         data = new ArrayList<>();
         loadClinics();

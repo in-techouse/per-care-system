@@ -51,8 +51,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         final Food f = data.get(position);
         Glide.with(context).load(f.getImage()).into(holder.image);
         holder.name.setText(f.getName());
-//        holder.price.setText(f.getPrice() + " RS.");
-//        holder.weight.setText(f.getWeight());
         holder.type.setText(f.getType());
         holder.mainCard.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,8 +79,6 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.FoodHolder> {
         FoodHolder(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.name);
-//            price = itemView.findViewById(R.id.price);
-//            weight = itemView.findViewById(R.id.quantity);
             type = itemView.findViewById(R.id.type);
             image = itemView.findViewById(R.id.image);
             mainCard = itemView.findViewById(R.id.mainCard);

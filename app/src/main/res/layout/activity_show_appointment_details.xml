@@ -294,6 +294,45 @@
                     android:background="@color/colorPrimary" />
 
 
+                <LinearLayout
+                    android:id="@+id/buttonLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="3dp"
+                    android:orientation="horizontal"
+                    android:padding="3dp"
+                    android:weightSum="2">
+
+                    <Button
+                        android:id="@+id/reject"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:text="Reject"
+                        android:textStyle="bold" />
+
+                    <Button
+                        android:id="@+id/accept"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:text="Accept"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/bottomView"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="11dp"
+                    android:layout_marginBottom="13dp"
+                    android:background="@color/colorPrimary" />
+
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

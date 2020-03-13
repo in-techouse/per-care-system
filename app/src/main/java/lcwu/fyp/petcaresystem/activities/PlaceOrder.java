@@ -36,7 +36,6 @@ public class PlaceOrder extends AppCompatActivity implements View.OnClickListene
     private LinearLayout loading;
     private ScrollView main;
     private Cart cart;
-    private TextView totalItems, totalPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +51,8 @@ public class PlaceOrder extends AppCompatActivity implements View.OnClickListene
         email = findViewById(R.id.email);
         phoneNumber = findViewById(R.id.phoneNumber);
         address = findViewById(R.id.address);
-        totalItems = findViewById(R.id.totalItems);
-        totalPrice = findViewById(R.id.totalPrice);
+        TextView totalItems = findViewById(R.id.totalItems);
+        TextView totalPrice = findViewById(R.id.totalPrice);
 
         loading = findViewById(R.id.loading);
         main = findViewById(R.id.main);

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".fragments.NotificationsFragment">
 
     <LinearLayout
-        android:id="@+id/Loading"
+        android:id="@+id/loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -21,18 +23,18 @@
             android:layout_height="wrap_content"
             android:layout_margin="7dp"
             android:padding="7dp"
-            android:text="Loading Notifications"
+            android:text="Loading Your Notifications"
             android:textAlignment="center" />
     </LinearLayout>
 
     <TextView
-        android:id="@+id/noNotification"
+        android:id="@+id/noRecord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_margin="7dp"
         android:padding="7dp"
-        android:text="No Notifications Found"
+        android:text="No Notification Found"
         android:textAlignment="center"
         android:visibility="gone" />
 
@@ -43,8 +45,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:visibility="gone" />
-
+        android:layout_alignParentBottom="true" />
 
 </RelativeLayout>

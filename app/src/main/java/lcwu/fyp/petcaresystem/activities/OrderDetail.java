@@ -32,12 +32,8 @@ import lcwu.fyp.petcaresystem.model.Order;
 import lcwu.fyp.petcaresystem.model.User;
 
 public class OrderDetail extends AppCompatActivity {
-    private Session session;
-    private User user;
     private Helpers helpers;
     private Order order;
-    private TextView address, name, email, phoneNumber, totalPrice, totalItems;
-    private RecyclerView foods;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Foods");
     private List<CartFood> cartFoods = new ArrayList<>();
     private OrderFoodAdapter adapter;
@@ -68,17 +64,17 @@ public class OrderDetail extends AppCompatActivity {
             return;
         }
 
-        session = new Session(getApplicationContext());
-        user = session.getUser();
+        Session session = new Session(getApplicationContext());
+        User user = session.getUser();
         helpers = new Helpers();
 
-        address = findViewById(R.id.address);
-        name = findViewById(R.id.name);
-        email = findViewById(R.id.email);
-        phoneNumber = findViewById(R.id.phoneNumber);
-        totalPrice = findViewById(R.id.totalPrice);
-        totalItems = findViewById(R.id.totalItems);
-        foods = findViewById(R.id.foods);
+        TextView address = findViewById(R.id.address);
+        TextView name = findViewById(R.id.name);
+        TextView email = findViewById(R.id.email);
+        TextView phoneNumber = findViewById(R.id.phoneNumber);
+        TextView totalPrice = findViewById(R.id.totalPrice);
+        TextView totalItems = findViewById(R.id.totalItems);
+        RecyclerView foods = findViewById(R.id.foods);
 
         foods.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         adapter = new OrderFoodAdapter(getApplicationContext());
@@ -124,12 +120,6 @@ public class OrderDetail extends AppCompatActivity {
                 }
                 Log.e("OrderDetail", "Cart foods list size: " + cartFoods.size());
                 adapter.setData(cartFoods);
-//                checkout.setText("Total " + total + " RS, Checkout");
-//                cart.setTotalPrice(total);
-//                session.setCart(cart);
-//                loading.setVisibility(View.GONE);
-//                carts.setVisibility(View.VISIBLE);
-//                checkout.setVisibility(View.VISIBLE);
             }
 
             @Override

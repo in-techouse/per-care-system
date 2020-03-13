@@ -21,7 +21,7 @@ import lcwu.fyp.petcaresystem.model.Appointment;
 
 public class AppointmentsAdapter extends RecyclerView.Adapter<AppointmentsAdapter.AppointmentsHolder> {
     private List<Appointment> data;
-    Context context;
+    private Context context;
 
     public AppointmentsAdapter(Context context) {
         this.context = context;

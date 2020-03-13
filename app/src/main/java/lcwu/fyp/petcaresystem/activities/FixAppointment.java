@@ -39,15 +39,18 @@ import lcwu.fyp.petcaresystem.model.User;
 public class FixAppointment extends AppCompatActivity {
 
     private User doc, user;
-    private ImageView doc_image;
-    private TextView doc_name, doc_detail, docContact, timeText, saveTime, savedTime, savedDate;
+    private TextView timeText;
+    private TextView saveTime;
+    private TextView savedTime;
+    private TextView savedDate;
     private Spinner petCategory;
     private int hour;
     private int min;
-    private String format, strCategory, strTime, strDate, strAddress;
+    private String strCategory;
+    private String strTime;
+    private String strDate;
+    private String strAddress;
     final Calendar myCalendar = Calendar.getInstance();
-    private Button getAppointmentBtn;
-    private Session session;
     private DatabaseReference appointmentReference = FirebaseDatabase.getInstance().getReference().child("Appointments");
     private Helpers helpers;
     private EditText address;
@@ -88,21 +91,21 @@ public class FixAppointment extends AppCompatActivity {
             Log.e("Fix Appointment", "got the doc");
         }
 
-        doc_image = findViewById(R.id.doc_image);
-        doc_name = findViewById(R.id.docName);
-        docContact = findViewById(R.id.docContact);
-        doc_detail = findViewById(R.id.docDetail);
+        ImageView doc_image = findViewById(R.id.doc_image);
+        TextView doc_name = findViewById(R.id.docName);
+        TextView docContact = findViewById(R.id.docContact);
+        TextView doc_detail = findViewById(R.id.docDetail);
         saveTime = findViewById(R.id.saveTime);
         timeText = findViewById(R.id.timeText);
         savedTime = findViewById(R.id.savedTime);
         savedDate = findViewById(R.id.savedDate);
         petCategory = findViewById(R.id.petCategory);
-        getAppointmentBtn = findViewById(R.id.getAppointmentBtn);
+        Button getAppointmentBtn = findViewById(R.id.getAppointmentBtn);
         address = findViewById(R.id.address);
         loading = findViewById(R.id.loading);
         main = findViewById(R.id.main);
 
-        session = new Session(FixAppointment.this);
+        Session session = new Session(FixAppointment.this);
         user = session.getUser();
         helpers = new Helpers();
 
@@ -188,6 +191,7 @@ public class FixAppointment extends AppCompatActivity {
 
 
     public void showTime(int hour, int min) {
+        String format;
         if (hour == 0) {
             hour += 12;
             format = "AM";

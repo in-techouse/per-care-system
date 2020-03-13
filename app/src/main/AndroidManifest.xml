@@ -55,6 +55,7 @@
         <activity
             android:name=".activities.DoctorDashboard"
             android:label="@string/app_name"
+            android:launchMode="singleInstance"
             android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".activities.Appointments"

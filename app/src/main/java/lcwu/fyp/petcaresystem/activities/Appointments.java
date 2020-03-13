@@ -34,7 +34,6 @@ public class Appointments extends AppCompatActivity {
     private LinearLayout appointmentsLoading;
     private TextView noAppointments;
     private RecyclerView appointments;
-    private Session session;
     private User user;
     private Helpers helpers;
     private List<Appointment> data;
@@ -50,7 +49,7 @@ public class Appointments extends AppCompatActivity {
         appointmentsLoading = findViewById(R.id.appointmentsLoading);
         noAppointments = findViewById(R.id.noAppointments);
         appointments = findViewById(R.id.appointments);
-        session = new Session(getApplicationContext());
+        Session session = new Session(getApplicationContext());
         user = session.getUser();
         helpers = new Helpers();
         data = new ArrayList<>();

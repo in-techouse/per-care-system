@@ -33,7 +33,6 @@ public class Orders extends AppCompatActivity {
     private LinearLayout loading;
     private TextView noRecord;
     private RecyclerView orders;
-    private Session session;
     private User user;
     private Helpers helpers;
     private List<Order> data;
@@ -48,7 +47,7 @@ public class Orders extends AppCompatActivity {
         loading = findViewById(R.id.loading);
         noRecord = findViewById(R.id.noRecord);
         orders = findViewById(R.id.orders);
-        session = new Session(Orders.this);
+        Session session = new Session(Orders.this);
         user = session.getUser();
         helpers = new Helpers();
         data = new ArrayList<>();

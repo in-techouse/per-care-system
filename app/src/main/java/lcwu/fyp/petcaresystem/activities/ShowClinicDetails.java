@@ -17,10 +17,6 @@ import lcwu.fyp.petcaresystem.model.Clinic;
 
 public class ShowClinicDetails extends AppCompatActivity {
 
-    private Clinic clinic;
-    private ImageView clinic_image;
-    private TextView clinic_name, start_time, end_time, clinic_address, clinic_fee;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +41,7 @@ public class ShowClinicDetails extends AppCompatActivity {
             return;
         }
 
-        clinic = (Clinic) b.getSerializable("clinic");
+        Clinic clinic = (Clinic) b.getSerializable("clinic");
         if (clinic == null) {
             Log.e("Fix Appointment", "Booking is NULL");
             finish();
@@ -55,12 +51,12 @@ public class ShowClinicDetails extends AppCompatActivity {
         }
 
 
-        clinic_image = findViewById(R.id.clinic_image);
-        clinic_name = findViewById(R.id.clinic_name);
-        start_time = findViewById(R.id.startTiming);
-        end_time = findViewById(R.id.endTiming);
-        clinic_fee = findViewById(R.id.fee);
-        clinic_address = findViewById(R.id.address);
+        ImageView clinic_image = findViewById(R.id.clinic_image);
+        TextView clinic_name = findViewById(R.id.clinic_name);
+        TextView start_time = findViewById(R.id.startTiming);
+        TextView end_time = findViewById(R.id.endTiming);
+        TextView clinic_fee = findViewById(R.id.fee);
+        TextView clinic_address = findViewById(R.id.address);
         if (clinic.getImage() != null && clinic.getImage().length() > 0) {
             Log.e("fix Appointment", "image added");
             Glide.with(this).load(clinic.getImage()).into(clinic_image);

@@ -21,20 +21,19 @@ import com.google.firebase.database.ValueEventListener;
 import lcwu.fyp.petcaresystem.R;
 import lcwu.fyp.petcaresystem.director.Session;
 import lcwu.fyp.petcaresystem.fragments.AppointmentsFragment;
-import lcwu.fyp.petcaresystem.fragments.DoctorProfileFragment;
 import lcwu.fyp.petcaresystem.fragments.NotificationsFragment;
+import lcwu.fyp.petcaresystem.fragments.ProfileFragment;
 import lcwu.fyp.petcaresystem.model.Appointment;
 import lcwu.fyp.petcaresystem.model.User;
 
-public class DoctorDashboard extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class DoctorDashboard extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private BottomNavigationView navView;
-    private DoctorProfileFragment profileFragment;
+    private ProfileFragment profileFragment;
     private AppointmentsFragment appointmentsFragment;
     private NotificationsFragment notificationsFragment;
     private ViewPager pager;
     private User user;
-    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +42,10 @@ public class DoctorDashboard extends AppCompatActivity implements BottomNavigati
 
         navView = findViewById(R.id.nav_view);
         pager = findViewById(R.id.pager);
-        profileFragment = new DoctorProfileFragment();
+        profileFragment = new ProfileFragment();
         appointmentsFragment = new AppointmentsFragment();
         notificationsFragment = new NotificationsFragment();
-        session = new Session(DoctorDashboard.this);
+        Session session = new Session(DoctorDashboard.this);
         user = session.getUser();
 
         navView.setOnNavigationItemSelectedListener(this);
@@ -108,18 +107,14 @@ public class DoctorDashboard extends AppCompatActivity implements BottomNavigati
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            switch (position)
-            {
-                case 0:
-                {
+            switch (position) {
+                case 0: {
                     return appointmentsFragment;
                 }
-                case 1:
-                {
+                case 1: {
                     return notificationsFragment;
                 }
-                case 2:
-                {
+                case 2: {
                     return profileFragment;
                 }
             }
@@ -137,30 +132,28 @@ public class DoctorDashboard extends AppCompatActivity implements BottomNavigati
         }
     }
 
-    void appointmentsListener(){
-        Log.e("appointments" , "in appointments listtener");
+    void appointmentsListener() {
+        Log.e("appointments", "in appointments listtener");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Appointments");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Appointment appointment = new Appointment();
-                Log.e("appointments" , "data received "+dataSnapshot);
-                Log.e("appointments" , "data received "+dataSnapshot.getChildren());
-                Log.e("appointments" , "data received "+dataSnapshot.getChildren());
-                for(DataSnapshot data : dataSnapshot.getChildren()){
+                Log.e("appointments", "data received " + dataSnapshot);
+                Log.e("appointments", "data received " + dataSnapshot.getChildren());
+                Log.e("appointments", "data received " + dataSnapshot.getChildren());
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
                     appointment = data.getValue(Appointment.class);
-                    if(appointment != null){
-                        if(user.getId().equals(appointment.getDoctorId())){
-                            Log.e("appointments" , "Here is an appointment for you");
-                        }else {
-                            Log.e("appointments" , "Appointments for other doctors");
+                    if (appointment != null) {
+                        if (user.getId().equals(appointment.getDoctorId())) {
+                            Log.e("appointments", "Here is an appointment for you");
+                        } else {
+                            Log.e("appointments", "Appointments for other doctors");
                         }
                     }
-
-
                 }
-
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

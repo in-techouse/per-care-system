@@ -33,12 +33,10 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
     private ProgressBar registrationProgress;
     private Helpers helpers;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_registration);
-
 
         helpers = new Helpers();
 
@@ -56,7 +54,6 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
 
         btnSubmit.setOnClickListener(this);
         go_To_Login.setOnClickListener(this);
-
     }
 
     @Override
@@ -207,7 +204,6 @@ public class DoctorRegistration extends AppCompatActivity implements View.OnClic
         } else {
             edtPassword.setError(null);
         }
-
 
         if (strCnfmPass.length() < 6) {
             edtCnfrmPass.setError("Password does not Match");

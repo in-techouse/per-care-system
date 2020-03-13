@@ -2,18 +2,17 @@ package lcwu.fyp.petcaresystem.fragments;
 
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +24,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lcwu.fyp.petcaresystem.R;
-import lcwu.fyp.petcaresystem.adapters.ClinicAdapter;
 import lcwu.fyp.petcaresystem.adapters.DoctorAdapter;
 import lcwu.fyp.petcaresystem.director.Helpers;
 import lcwu.fyp.petcaresystem.director.Session;
@@ -35,13 +33,9 @@ import lcwu.fyp.petcaresystem.model.User;
  * A simple {@link Fragment} subclass.
  */
 public class DoctorFragment extends Fragment {
-
-
     private LinearLayout loading;
     private TextView noDoctor;
     private RecyclerView doctors;
-    private Session session;
-    private User user;
     private Helpers helpers;
     private List<User> data;
     private DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -66,8 +60,8 @@ public class DoctorFragment extends Fragment {
         adapter = new DoctorAdapter(getActivity());
         doctors.setLayoutManager(new LinearLayoutManager(getActivity()));
         doctors.setAdapter(adapter);
-        session = new Session(getActivity());
-        user = session.getUser();
+        Session session = new Session(getActivity());
+        User user = session.getUser();
         helpers = new Helpers();
         data = new ArrayList<>();
         loadDoctors();

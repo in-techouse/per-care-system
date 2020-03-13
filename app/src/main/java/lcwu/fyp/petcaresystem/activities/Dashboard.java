@@ -102,14 +102,14 @@ public class Dashboard extends AppCompatActivity implements BottomNavigationView
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.user_cart,menu);
+        getMenuInflater().inflate(R.menu.user_cart, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_cart:{
+        switch (item.getItemId()) {
+            case R.id.action_cart: {
                 Intent it = new Intent(Dashboard.this, CartActivity.class);
                 startActivity(it);
                 break;

@@ -35,6 +35,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     private RelativeLayout orders, notifications, appointments;
     private TextView edit;
     private CircleImageView profile_image;
+    private View appointmentsView, notificationsView, ordersView;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -71,6 +72,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         notifications.setOnClickListener(this);
         appointments.setOnClickListener(this);
         logout.setOnClickListener(this);
+
+        if (user.getRole() == 2) {
+            appointmentsView = v.findViewById(R.id.appointmentsView);
+            notificationsView = v.findViewById(R.id.notificationsView);
+            ordersView = v.findViewById(R.id.ordersView);
+            orders.setVisibility(View.GONE);
+            notifications.setVisibility(View.GONE);
+            appointments.setVisibility(View.GONE);
+            ordersView.setVisibility(View.GONE);
+            notificationsView.setVisibility(View.GONE);
+            appointmentsView.setVisibility(View.GONE);
+        }
         return v;
     }
 

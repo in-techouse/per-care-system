@@ -48,17 +48,17 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:layout_below="@id/doc_name"
                 android:id="@+id/doc_contact"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@id/doc_name"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/docImage"
                 android:text="doc name"
                 android:textAlignment="textStart"
                 android:textColor="#444"
-                android:textSize="18dp"/>
+                android:textSize="18dp" />
 
             <TextView
                 android:id="@+id/doc_detail"

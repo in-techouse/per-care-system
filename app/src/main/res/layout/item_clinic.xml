@@ -1,228 +1,226 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@id/main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="7dp"
     app:cardCornerRadius="11dp"
-    app:cardElevation="11dp"
-    android:id="@id/main">
+    app:cardElevation="11dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <ImageView
-            android:scaleType="fitXY"
             android:id="@+id/clinic_image"
             android:layout_width="match_parent"
-            android:layout_height="250dp"/>
+            android:layout_height="250dp"
+            android:scaleType="fitXY" />
 
 
         <TextView
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingStart="13dp"
-            android:paddingEnd="13dp"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"
-            android:layout_marginTop="13dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginEnd="7dp"
-            android:textAlignment="textStart"
-            android:textStyle="bold"
-            android:textAllCaps="true"
-            android:text="clinic name"
-            android:textSize="19dp"
             android:id="@+id/clinic_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="7dp"
+            android:background="@color/colorPrimary"
+            android:paddingStart="13dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="13dp"
+            android:paddingBottom="5dp"
+            android:text="clinic name"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="19dp"
+            android:textStyle="bold" />
 
 
         <View
             android:id="@+id/spacer"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
             android:layout_below="@id/clinic_image"
             android:layout_marginBottom="3dp"
-            android:background="@color/colorPrimary"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"/>
+            android:background="@color/colorPrimary" />
 
 
         <TextView
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/spacer"
-            android:textColor="@color/colorPrimary"
-            android:paddingStart="7dp"
-            android:paddingEnd="7dp"
-            android:paddingTop="3dp"
-            android:paddingBottom="11dp"
-            android:layout_gravity="end"
-            android:textAlignment="textEnd"
-            android:text="Show More"
             android:id="@+id/showMore"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/spacer"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:paddingStart="7dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="7dp"
+            android:paddingBottom="11dp"
+            android:text="Show More"
+            android:textAlignment="textEnd"
+            android:textColor="@color/colorPrimary" />
 
 
         <TextView
-            android:layout_above="@id/spacer"
-            android:layout_alignParentEnd="true"
-            android:paddingTop="5dp"
-            android:paddingBottom="5dp"
-            android:paddingStart="13dp"
-            android:paddingEnd="13dp"
-            android:background="@color/colorPrimary"
-            android:textColor="@color/colorWhite"
-            android:layout_marginBottom="13dp"
-            android:layout_marginStart="7dp"
-            android:layout_marginEnd="7dp"
-            android:textAlignment="textStart"
-            android:textAllCaps="true"
-            android:text="type"
-            android:textSize="19dp"
             android:id="@+id/clinic_fee"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_above="@id/spacer"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"
+            android:layout_marginBottom="13dp"
+            android:background="@color/colorPrimary"
+            android:paddingStart="13dp"
+            android:paddingTop="5dp"
+            android:paddingEnd="13dp"
+            android:paddingBottom="5dp"
+            android:text="type"
+            android:textAlignment="textStart"
+            android:textAllCaps="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="19dp" />
 
 
+        <!--        -->
 
-<!--        -->
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:text="Name"-->
+        <!--                android:textSize="17dp"-->
+        <!--                android:textStyle="bold" />-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:text="Name"-->
-<!--                android:textSize="17dp"-->
-<!--                android:textStyle="bold" />-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/name"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_centerVertical="true" />-->
+        <!--        </RelativeLayout>-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/name"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_centerVertical="true" />-->
-<!--        </RelativeLayout>-->
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="3dp">-->
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="3dp">-->
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:text="Number"-->
+        <!--                android:textSize="17dp"-->
+        <!--                android:textStyle="bold" />-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:text="Number"-->
-<!--                android:textSize="17dp"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/number"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:textSize="17dp" />-->
-<!--        </RelativeLayout>-->
-
-
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="3dp">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:text="Address"-->
-<!--                android:textSize="17dp"-->
-<!--                android:textStyle="bold" />-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/address"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:textSize="17dp" />-->
-<!--        </RelativeLayout>-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/number"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:textSize="17dp" />-->
+        <!--        </RelativeLayout>-->
 
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="3dp">-->
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="3dp">-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:text="Start Timing"-->
-<!--                android:textSize="17dp"-->
-<!--                android:textStyle="bold" />-->
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:text="Address"-->
+        <!--                android:textSize="17dp"-->
+        <!--                android:textStyle="bold" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/startTiming"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:textSize="17dp" />-->
-<!--        </RelativeLayout>-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/address"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:textSize="17dp" />-->
+        <!--        </RelativeLayout>-->
 
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="3dp">-->
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="3dp">-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:text="End Timing"-->
-<!--                android:textSize="17dp"-->
-<!--                android:textStyle="bold" />-->
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:text="Start Timing"-->
+        <!--                android:textSize="17dp"-->
+        <!--                android:textStyle="bold" />-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/endTiming"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:textSize="17dp" />-->
-<!--        </RelativeLayout>-->
+        <!--            <TextView-->
+        <!--                android:id="@+id/startTiming"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:textSize="17dp" />-->
+        <!--        </RelativeLayout>-->
 
-<!--        <RelativeLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginTop="3dp">-->
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:text="Fee"-->
-<!--                android:textSize="17dp"-->
-<!--                android:textStyle="bold" />-->
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="3dp">-->
 
-<!--            <TextView-->
-<!--                android:id="@+id/fee"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_centerVertical="true"-->
-<!--                android:textSize="17dp" />-->
-        </RelativeLayout>
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:text="End Timing"-->
+        <!--                android:textSize="17dp"-->
+        <!--                android:textStyle="bold" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/endTiming"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:textSize="17dp" />-->
+        <!--        </RelativeLayout>-->
+
+        <!--        <RelativeLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginTop="3dp">-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentStart="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:text="Fee"-->
+        <!--                android:textSize="17dp"-->
+        <!--                android:textStyle="bold" />-->
+
+        <!--            <TextView-->
+        <!--                android:id="@+id/fee"-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_alignParentEnd="true"-->
+        <!--                android:layout_centerVertical="true"-->
+        <!--                android:textSize="17dp" />-->
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

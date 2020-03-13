@@ -34,7 +34,6 @@ import lcwu.fyp.petcaresystem.model.User;
  */
 public class FoodFragment extends Fragment {
 
-
     private LinearLayout loading;
     private TextView noFood;
     private RecyclerView food;

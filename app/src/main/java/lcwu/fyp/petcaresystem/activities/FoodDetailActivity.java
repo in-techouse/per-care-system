@@ -27,10 +27,7 @@ import lcwu.fyp.petcaresystem.model.Food;
 public class FoodDetailActivity extends AppCompatActivity implements View.OnClickListener {
     private CoordinatorLayout parent;
     private Food food;
-    private ImageView image;
-    private TextView name, type, price, weight, quantity;
-    private Button addToCart;
-    private ImageView plusCart, minusCart;
+    private TextView quantity;
     private int finalQuantity = 1;
     private Session session;
     private Cart cart;
@@ -65,24 +62,24 @@ public class FoodDetailActivity extends AppCompatActivity implements View.OnClic
         if (getSupportActionBar() != null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        image = findViewById(R.id.image);
+        ImageView image = findViewById(R.id.image);
         parent = findViewById(R.id.parent);
 
         Glide.with(getApplicationContext()).load(food.getImage()).into(image);
 
-        name = findViewById(R.id.name);
-        type = findViewById(R.id.type);
-        price = findViewById(R.id.price);
-        weight = findViewById(R.id.weight);
+        TextView name = findViewById(R.id.name);
+        TextView type = findViewById(R.id.type);
+        TextView price = findViewById(R.id.price);
+        TextView weight = findViewById(R.id.weight);
 
         name.setText(food.getName());
         type.setText(food.getType());
         price.setText(food.getPrice() + " RS");
         weight.setText(food.getWeight());
         quantity = findViewById(R.id.quantity);
-        minusCart = findViewById(R.id.minusCart);
-        plusCart = findViewById(R.id.plusCart);
-        addToCart = findViewById(R.id.addToCart);
+        ImageView minusCart = findViewById(R.id.minusCart);
+        ImageView plusCart = findViewById(R.id.plusCart);
+        Button addToCart = findViewById(R.id.addToCart);
 
         minusCart.setOnClickListener(this);
         plusCart.setOnClickListener(this);
